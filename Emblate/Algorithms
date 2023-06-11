@@ -1,4 +1,0 @@
-#include "src/Algorithms/Compare.h"
-#include "src/Algorithms/Interpolate.h"
-#include "src/Algorithms/Math.h"
-#include "src/Algorithms/Search.h"

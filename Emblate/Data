@@ -1,5 +1,0 @@
-#include "src/Data/List.h"
-#include "src/Data/Queue.h"
-#include "src/Data/Stack.h"
-#include "src/Data/Tuple.h"
-#include "src/Data/Vector.h"

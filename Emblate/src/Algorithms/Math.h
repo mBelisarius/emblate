@@ -3,11 +3,11 @@
 
 namespace Emblate
 {
-	template<typename T>
-	T abs(T val)
-	{
-		return val >= 0 ? val : -val;
-	}
+    template<typename T>
+    T abs(T val)
+    {
+        return val >= 0 ? val : -val;
+    }
 }
 
 #endif /* EMBLATE_MATH_H */

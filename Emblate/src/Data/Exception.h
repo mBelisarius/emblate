@@ -3,7 +3,7 @@
 
 namespace Emblate
 {
-	struct out_of_range {};
+    struct out_of_range {};
 }
 
 #endif /* EMBLATE_EXCEPTION_H */

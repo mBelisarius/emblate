@@ -5,6 +5,14 @@
 
 namespace Emblate
 {
+    template<typename T>
+    void swap(T& val1, T& val2)
+    {
+        val1 += val2;
+        val2 = val1 - val2;
+        val1 -= val2;
+    }
+
     bool strCmp(const char* str1, const char* str2)
     {
         while (*str1 && (*str1 == *str2))

@@ -1,5 +1,5 @@
-#ifndef EMBLATE_INTERPOLATION_H
-#define EMBLATE_INTERPOLATION_H
+#ifndef EMBLATE_INTERPOLATE_H
+#define EMBLATE_INTERPOLATE_H
 
 #include "Search.h"
 #include "../Data/Defines.h"
@@ -46,27 +46,14 @@ namespace Emblate
     template<typename T>
     T Interp1d<T>::linear(T t)
     {
+        if (t < _x.front() || t > _x.back()) { throw; }
+
         size_t i = binarySearch<T>(_x, t, 0, _size - 1);
-        T dydx;
+        if ((i == _size - 1) || (i != 0 && t < _x[i])) { i--; }
 
-        if (i == 0)
-        {
-            dydx = ((_y[i + 1] - _y[i]) / (_x[i + 1] - _x[i]));
-        }
-
-        else if (i == _size - 1)
-        {
-            dydx = ((_y[i] - _y[i - 1]) / (_x[i] - _x[i - 1]));
-        }
-
-        else
-        {
-            dydx = (((_y[i + 1] - _y[i]) / (_x[i + 1] - _x[i]))
-                    + ((_y[i] - _y[i - 1]) / (_x[i] - _x[i - 1]))) / 2;
-        }
-
+        T dydx = ((_y[i + 1] - _y[i]) / (_x[i + 1] - _x[i]));
         return _y[i] + dydx * (t - _x[i]);
     }
 }
 
-#endif /* EMBLATE_INTERPOLATION_H */
+#endif /* EMBLATE_INTERPOLATE_H */

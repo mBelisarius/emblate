@@ -75,6 +75,9 @@ namespace Emblate
         // Removes the last (back) element
         T pop_back();
 
+        // Swap two elements
+        void swap(size_t i, size_t j);
+
     private:
         // Pointer to first element
         T* _data;
@@ -313,6 +316,14 @@ namespace Emblate
     {
         _size--;
         return _data[_size];
+    }
+
+    template<typename T>
+    void Vector<T>::swap(size_t i, size_t j)
+    {
+        _data[i] += _data[j];
+        _data[j] = _data[i] - _data[j];
+        _data[i] -= _data[j];
     }
 }
 

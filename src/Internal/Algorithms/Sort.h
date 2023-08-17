@@ -1,8 +1,8 @@
 #ifndef EMBLATE_SORT_H
 #define EMBLATE_SORT_H
 
-#include "Math.h"
-#include "Utils.h"
+#include "./Math.h"
+#include "./Utils.h"
 #include "../Data/Vector.h"
 
 namespace Emblate

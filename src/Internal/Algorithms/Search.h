@@ -1,7 +1,7 @@
 #ifndef EMBLATE_SEARCH_H
 #define EMBLATE_SEARCH_H
 
-#include "Math.h"
+#include "./Math.h"
 #include "../Data/Defines.h"
 #include "../Data/Vector.h"
 

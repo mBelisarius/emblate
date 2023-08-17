@@ -1,5 +1,5 @@
-#ifndef EMBLATE_COMPARE_H
-#define EMBLATE_COMPARE_H
+#ifndef EMBLATE_UTILS_H
+#define EMBLATE_UTILS_H
 
 #include "../Data/Defines.h"
 
@@ -24,4 +24,4 @@ namespace Emblate
     }
 }
 
-#endif /* EMBLATE_COMPARE_H */
+#endif /* EMBLATE_UTILS_H */

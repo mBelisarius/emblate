@@ -1,9 +1,9 @@
 #ifndef EMBLATE_QUEUE_H
 #define EMBLATE_QUEUE_H
 
-#include "Defines.h"
-#include "Exception.h"
-#include "List.h"
+#include "./Defines.h"
+#include "./Exception.h"
+#include "./List.h"
 
 namespace Emblate
 {
@@ -126,7 +126,7 @@ namespace Emblate
     template<typename T>
     Queue<T>::~Queue()
     {
-        delete _data;
+        _data.~List();
     }
 
     template<class T>

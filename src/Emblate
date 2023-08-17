@@ -1,2 +1,2 @@
-#include "Algorithms.h"
-#include "Data.h"
+#include "Algorithms"
+#include "Data"

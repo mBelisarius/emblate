@@ -1,8 +1,8 @@
 #ifndef EMBLATE_LIST_H
 #define EMBLATE_LIST_H
 
-#include "Defines.h"
-#include "Exception.h"
+#include "./Defines.h"
+#include "./Exception.h"
 
 namespace Emblate
 {

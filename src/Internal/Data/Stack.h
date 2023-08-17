@@ -1,9 +1,9 @@
 #ifndef EMBLATE_STACK_H
 #define EMBLATE_STACK_H
 
-#include "Defines.h"
-#include "Exception.h"
-#include "List.h"
+#include "./Defines.h"
+#include "./Exception.h"
+#include "./List.h"
 
 namespace Emblate
 {

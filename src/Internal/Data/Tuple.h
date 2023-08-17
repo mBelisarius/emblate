@@ -1,8 +1,8 @@
 #ifndef EMBLATE_TUPLE_H
 #define EMBLATE_TUPLE_H
 
-#include "Defines.h"
-#include "Exception.h"
+#include "./Defines.h"
+#include "./Exception.h"
 
 namespace Emblate
 {

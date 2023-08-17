@@ -2,8 +2,8 @@
 #define EMBLATE_QUEUE_H
 
 #include "./Defines.h"
-#include "./Exception.h"
 #include "./List.h"
+#include "../Core/Exception.h"
 
 namespace Emblate
 {

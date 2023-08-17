@@ -3,6 +3,8 @@
 
 namespace Emblate
 {
+    struct not_implemented {};
+
     struct out_of_range {};
 }
 

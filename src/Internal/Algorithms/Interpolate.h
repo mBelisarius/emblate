@@ -3,6 +3,7 @@
 
 #include "./Search.h"
 #include "./Sort.h"
+#include "../Core/Exception.h"
 #include "../Data/Defines.h"
 #include "../Data/Vector.h"
 
@@ -14,8 +15,8 @@ namespace Emblate
     public:
         /*--- Constructors ---*/
         Interp1d(Vector<T> x, Vector<T> y,
-                 bool checkBounds,
-                 bool assumeSorted);
+                 bool checkBounds = false,
+                 bool assumeSorted = false);
 
         /*--- Methods ---*/
         T linear(T t);
@@ -31,8 +32,8 @@ namespace Emblate
 
     template<typename T>
     Interp1d<T>::Interp1d(Vector<T> x, Vector<T> y,
-                          bool checkBounds = false,
-                          bool assumeSorted = false)
+                          bool checkBounds,
+                          bool assumeSorted)
             : _x(x), _y(y),
               _checkBounds(checkBounds),
               _assumeSorted(assumeSorted)
@@ -43,7 +44,7 @@ namespace Emblate
         // TODO: Implement sorting algorithms
         if (!_assumeSorted)
         {
-            throw;
+            throw not_implemented();
         }
     }
 

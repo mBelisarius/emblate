@@ -2,7 +2,7 @@
 #define EMBLATE_LIST_H
 
 #include "./Defines.h"
-#include "./Exception.h"
+#include "../Core/Exception.h"
 
 namespace Emblate
 {

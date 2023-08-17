@@ -89,10 +89,10 @@ namespace Emblate
         void push_back(const T value);
 
         // Removes the first (front) element
-        T pop_front();
+        void pop_front();
 
         // Removes the last (back) element
-        T pop_back();
+        void pop_back();
 
     private:
         // Front and back links
@@ -185,14 +185,7 @@ namespace Emblate
     template<typename T>
     List<T>::~List()
     {
-        // TODO: implementation
-        for (size_t i = size(); i > 0; i--)
-        {
-            pop_back();
-        }
-
-        // delete _frontLink;
-        // delete _backLink;
+        while (size() > 0) { pop_back(); }
     }
 
     template<class Elem>
@@ -381,35 +374,29 @@ namespace Emblate
     }
 
     template<typename T>
-    T List<T>::pop_front()
+    void List<T>::pop_front()
     {
-        // TODO: throw exception
-        if (empty())
-            throw;
+        if (empty()) { return; }
 
-        Link<T>* tmp = _frontLink->_next->_next;
-        tmp->_prev = _frontLink;
-        _frontLink->_next = tmp;
-        // TODO: delete tmp->_prev
-
+        Link<T>* tmp = _frontLink->_next;
+        tmp->_next->_prev = _frontLink;
+        _frontLink->_next = tmp->_next;
         _size--;
-        return tmp->_next->_value;
+
+        delete tmp;
     }
 
     template<typename T>
-    T List<T>::pop_back()
+    void List<T>::pop_back()
     {
-        // TODO: throw exception
-        if (empty())
-            throw;
+        if (empty()) { return; }
 
-        Link<T>* tmp = _backLink->_prev->_prev;
-        tmp->_next = _backLink;
-        _backLink->_prev = tmp;
-        // TODO: delete tmp->_next
-
+        Link<T>* tmp = _backLink->_prev;
+        tmp->_prev->_next = _backLink;
+        _backLink->_prev = tmp->_prev;
         _size--;
-        return tmp->_next->_value;
+
+        delete tmp;
     }
 }
 

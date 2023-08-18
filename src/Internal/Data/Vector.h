@@ -19,10 +19,10 @@ namespace Emblate
         Vector(const T* array, size_t size);
 
         // Copy constructor
-        Vector(const Vector& vector_);
+        Vector(const Vector& other);
 
         // Copy Assingment
-        Vector<T>& operator=(const Vector<T>& vector_);
+        Vector<T>& operator=(const Vector<T>& other);
 
         // Destructor
         ~Vector();
@@ -79,83 +79,78 @@ namespace Emblate
         void swap(size_t i, size_t j);
 
     private:
-        // Pointer to first element
-        T* _data;
-
-        // Number of elements (used capacity)
-        size_t _size;
-
-        // Total size (capacity)
-        size_t _capacity;
+        T* m_data;
+        size_t m_size;
+        size_t m_capacity;
     };
 
     template<typename T>
     Vector<T>::Vector()
-            : _data(0), _size(0), _capacity(0)
+            : m_data(0), m_size(0), m_capacity(0)
     {
     }
 
     template<typename T>
     Vector<T>::Vector(size_t size)
-            : _data(new T[size]), _size(size), _capacity(size)
+            : m_data(new T[size]), m_size(size), m_capacity(size)
     {
-        for (size_t i = 0; i < _capacity; i++)
+        for (size_t i = 0; i < m_capacity; i++)
         {
-            _data[i] = T();
+            m_data[i] = T();
         }
     }
 
     template<typename T>
     Vector<T>::Vector(size_t size, const T& value)
-            : _data(new T[size]), _size(size), _capacity(size)
+            : m_data(new T[size]), m_size(size), m_capacity(size)
     {
-        for (size_t i = 0; i < _capacity; i++)
+        for (size_t i = 0; i < m_capacity; i++)
         {
-            _data[i] = value;
+            m_data[i] = value;
         }
     }
 
     template<typename T>
     Vector<T>::Vector(const T* array, size_t size)
-            : _data(new T[size]), _size(size), _capacity(size)
+            : m_data(new T[size]), m_size(size), m_capacity(size)
     {
-        for (size_t i = 0; i < _size; i++)
+        for (size_t i = 0; i < m_size; i++)
         {
-            _data[i] = array[i];
+            m_data[i] = array[i];
         }
     }
 
     template<class T>
-    Vector<T>::Vector(const Vector<T>& vector_)
-            : _data(new T[vector_._size]), _size(vector_._size),
-              _capacity(vector_._size)
+    Vector<T>::Vector(const Vector<T>& other)
+            : m_data(new T[other.m_size]), m_size(other.m_size),
+              m_capacity(other.m_size)
     {
-        for (size_t i = 0; i < vector_._size; i++)
+        for (size_t i = 0; i < other.m_size; i++)
         {
-            _data[i] = vector_._data[i];
+            m_data[i] = other.m_data[i];
         }
     }
 
     template<typename T>
-    Vector<T>& Vector<T>::operator=(const Vector<T>& vector_)
+    Vector<T>& Vector<T>::operator=(const Vector<T>& other)
     {
         // Self-assignment
-        if (this == &vector_) return *this;
+        if (this == &other) { return *this; }
 
         // Memory reallocation
-        if (vector_._size > _capacity)
+        if (other.m_size > m_capacity)
         {
-            delete _data;
-            _data = new T[vector_._size];
-            _capacity = vector_._size;
+            delete m_data;
+            m_data = new T[other.m_size];
+            m_capacity = other.m_size;
         }
 
         // Copy assignment
-        _size = vector_._size;
+        m_size = other.m_size;
 
-        for (size_t i = 0; i < vector_._size; i++)
+        for (size_t i = 0; i < other.m_size; i++)
         {
-            _data[i] = vector_._data[i];
+            m_data[i] = other.m_data[i];
         }
 
         return *this;
@@ -164,166 +159,164 @@ namespace Emblate
     template<typename T>
     Vector<T>::~Vector()
     {
-        delete[] _data;
+        delete[] m_data;
     }
 
     template<class T>
     void Vector<T>::reserve(size_t capacity)
     {
         // This capacity is already sufficient
-        if (capacity <= _capacity) return;
+        if (capacity <= m_capacity) { return; }
 
         T* tmp = new T[capacity];
 
-        for (size_t i = 0; i < _size; i++)
+        for (size_t i = 0; i < m_size; i++)
         {
-            tmp[i] = _data[i];
+            tmp[i] = m_data[i];
         }
 
-        for (size_t i = _size; i < capacity; i++)
+        for (size_t i = m_size; i < capacity; i++)
         {
             tmp[i] = T();
         }
 
-        delete[] _data;
+        delete[] m_data;
 
-        _data = tmp;
-        _capacity = capacity;
+        m_data = tmp;
+        m_capacity = capacity;
     }
 
     template<class T>
     void Vector<T>::shrink_to_fit()
     {
         // Capacity is already minimal
-        if (_size == _capacity) return;
+        if (m_size == m_capacity) { return; }
 
-        T* tmp = new T[_size];
+        T* tmp = new T[m_size];
 
-        for (size_t i = 0; i < _size; i++)
+        for (size_t i = 0; i < m_size; i++)
         {
-            tmp[i] = _data[i];
+            tmp[i] = m_data[i];
         }
 
-        delete[] _data;
+        delete[] m_data;
 
-        _data = tmp;
-        _capacity = _size;
+        m_data = tmp;
+        m_capacity = m_size;
     }
 
     template<class T>
     bool Vector<T>::empty() const
     {
-        return (_size == 0);
+        return (m_size == 0);
     }
 
     template<typename T>
     size_t Vector<T>::size()
     {
-        return _size;
+        return m_size;
     }
 
     template<typename T>
     size_t Vector<T>::capacity()
     {
-        return _capacity;
+        return m_capacity;
     }
 
     template<class T>
     T& Vector<T>::at(size_t i)
     {
-        if (i >= _size) throw out_of_range();
-        return _data[i];
+        if (i >= m_size) { throw out_of_range(); }
+        return m_data[i];
     }
 
     template<class T>
     const T& Vector<T>::at(size_t i) const
     {
-        if (i >= _size) throw out_of_range();
-        return _data[i];
+        if (i >= m_size) { throw out_of_range(); }
+        return m_data[i];
     }
 
     template<class T>
     T& Vector<T>::operator[](size_t i)
     {
-        return _data[i % _size];
+        return m_data[i % m_size];
     }
 
     template<class T>
     const T& Vector<T>::operator[](size_t i) const
     {
-        return _data[i % _size];
+        return m_data[i % m_size];
     }
 
     template<class T>
     T& Vector<T>::front()
     {
-        return _data[0];
+        return m_data[0];
     }
 
     template<class T>
     const T& Vector<T>::front() const
     {
-        return _data[0];
+        return m_data[0];
     }
 
     template<class T>
     T& Vector<T>::back()
     {
-        return _data[_size - 1];
+        return m_data[m_size - 1];
     }
 
     template<class T>
     const T& Vector<T>::back() const
     {
-        return _data[_size - 1];
+        return m_data[m_size - 1];
     }
 
     template<class T>
     T* Vector<T>::data()
     {
-        return _data;
+        return m_data;
     }
 
     template<class T>
     const T* Vector<T>::data() const
     {
-        return _data;
+        return m_data;
     }
 
     template<typename T>
     void Vector<T>::clear()
     {
-        for (size_t i = 0; i < _size; i++)
+        for (size_t i = 0; i < m_size; i++)
         {
-            _data[i] = T();
+            m_data[i] = T();
         }
     }
 
     template<typename T>
     void Vector<T>::push_back(T value)
     {
-        if (_capacity == 0)
-            reserve(8);
-        else if (_size == _capacity)
-            reserve(2 * _capacity);
+        if (m_capacity == 0) { reserve(8); }
+        else if (m_size == m_capacity) { reserve(2 * m_capacity); }
 
-        _data[_size] = value;
-        _size++;
+        m_data[m_size] = value;
+        m_size++;
     }
 
     template<typename T>
     T Vector<T>::pop_back()
     {
-        _size--;
-        return _data[_size];
+        m_size--;
+        return m_data[m_size];
     }
 
     template<typename T>
     void Vector<T>::swap(size_t i, size_t j)
     {
-        _data[i] += _data[j];
-        _data[j] = _data[i] - _data[j];
-        _data[i] -= _data[j];
+        m_data[i] += m_data[j];
+        m_data[j] = m_data[i] - m_data[j];
+        m_data[i] -= m_data[j];
     }
 }
 

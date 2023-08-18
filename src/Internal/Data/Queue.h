@@ -19,11 +19,11 @@ namespace Emblate
         Queue(const T* array, size_t size, bool reverse = false);
 
         // Copy constructor
-        Queue(Queue& queue_);
-        Queue(const Queue& queue_);
+        Queue(Queue& other);
+        Queue(const Queue& other);
 
         // Copy Assingment
-        Queue<T>& operator=(const Queue<T>& queue_);
+        Queue<T>& operator=(const Queue<T>& other);
 
         // Destructor
         ~Queue();
@@ -76,49 +76,48 @@ namespace Emblate
         void push_back(T value);
 
     private:
-        // List containing the data
-        List<T> _data;
+        List<T> m_data;
     };
 
     template<typename T>
     Queue<T>::Queue()
-            : _data()
+            : m_data()
     {
     }
 
     template<typename T>
     Queue<T>::Queue(size_t size, const T& value)
-            : _data(size, value)
+            : m_data(size, value)
     {
     }
 
     template<typename T>
     Queue<T>::Queue(const T* array, size_t size, bool reverse)
-            : _data(array, size, reverse)
+            : m_data(array, size, reverse)
     {
     }
 
     template<class T>
-    Queue<T>::Queue(Queue<T>& queue_)
-            : _data(queue_._data)
+    Queue<T>::Queue(Queue<T>& other)
+            : m_data(other.m_data)
     {
     }
 
     template<class T>
-    Queue<T>::Queue(const Queue<T>& queue_)
-            : _data(queue_._data)
+    Queue<T>::Queue(const Queue<T>& other)
+            : m_data(other.m_data)
     {
     }
 
     template<typename T>
-    Queue<T>& Queue<T>::operator=(const Queue<T>& queue_)
+    Queue<T>& Queue<T>::operator=(const Queue<T>& other)
     {
         // Self-assignment
-        if (this == &queue_) return *this;
+        if (this == &other) return *this;
 
         // Copy assignment
-        delete _data;
-        _data = new List<T>(queue_._data);
+        delete m_data;
+        m_data = new List<T>(other.m_data);
 
         return *this;
     }
@@ -126,99 +125,99 @@ namespace Emblate
     template<typename T>
     Queue<T>::~Queue()
     {
-        _data.~List();
+        m_data.~List();
     }
 
     template<class T>
     bool Queue<T>::empty() const
     {
-        return (size() == 0);
+        return size() == 0;
     }
 
     template<typename T>
     size_t Queue<T>::size()
     {
-        return _data.size();
+        return m_data.size();
     }
 
     template<class T>
     T& Queue<T>::at(size_t i)
     {
-        if (i >= size()) throw out_of_range();
-        return _data[i];
+        if (i >= size()) { throw out_of_range(); }
+        return m_data[i];
     }
 
     template<class T>
     const T& Queue<T>::at(size_t i) const
     {
-        if (i >= size()) throw out_of_range();
-        return _data[i];
+        if (i >= size()) { throw out_of_range(); }
+        return m_data[i];
     }
 
     template<class T>
     T& Queue<T>::operator[](size_t i)
     {
-        return _data[i];
+        return m_data[i];
     }
 
     template<class T>
     const T& Queue<T>::operator[](size_t i) const
     {
-        return _data[i];
+        return m_data[i];
     }
 
     template<class T>
     T& Queue<T>::front()
     {
-        return _data[0];
+        return m_data[0];
     }
 
     template<class T>
     const T& Queue<T>::front() const
     {
-        return _data[0];
+        return m_data[0];
     }
 
     template<class T>
     T& Queue<T>::back()
     {
-        return _data[size() - 1];
+        return m_data[size() - 1];
     }
 
     template<class T>
     const T& Queue<T>::back() const
     {
-        return _data[size() - 1];
+        return m_data[size() - 1];
     }
 
     template<class T>
     T* Queue<T>::data()
     {
-        return _data;
+        return m_data;
     }
 
     template<class T>
     const T* Queue<T>::data() const
     {
-        return _data;
+        return m_data;
     }
 
     template<typename T>
     void Queue<T>::clear()
     {
-        _data.clear();
+        m_data.clear();
     }
 
     template<typename T>
     void Queue<T>::enqueue(T value)
     {
-        _data.push_front(value);
+        m_data.push_front(value);
     }
 
     template<typename T>
     T Queue<T>::dequeue()
     {
-        return _data.pop_back();
+        return m_data.pop_back();
     }
 
     template<typename T>
@@ -239,7 +238,7 @@ namespace Emblate
     template<typename T>
     void Queue<T>::push_back(T value)
     {
-        _data.push_back(value);
+        m_data.push_back(value);
     }
 }
 #endif /* EMBLATE_QUEUE_H */

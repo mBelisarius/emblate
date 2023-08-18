@@ -12,18 +12,18 @@ namespace Emblate
     template<typename T>
     inline int floor(T val)
     {
-        return (int)val;
+        return static_cast<int>(val);
     }
 
     template<typename T>
     inline int ceil(T val)
     {
-        if (val >= 0 && val - (int)val > 0)
+        if ((val >= 0) && (val - (int)val > 0))
         {
-            return (int)(val + 1);
+            return static_cast<int>(val + 1);
         }
 
-        return (int)(val);
+        return static_cast<int>(val);
     }
 }
 

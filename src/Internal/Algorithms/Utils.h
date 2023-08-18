@@ -20,6 +20,7 @@ namespace Emblate
             str1++;
             str2++;
         }
+
         return *(const unsigned char*)str1 == *(const unsigned char*)str2;
     }
 }

@@ -19,10 +19,10 @@ namespace Emblate
         Tuple(const T* array, size_t size);
 
         // Copy constructor
-        Tuple(const Tuple& tuple_);
+        Tuple(const Tuple& other);
 
         // Copy Assingment
-        Tuple<T>& operator=(const Tuple<T>& tuple_);
+        Tuple<T>& operator=(const Tuple<T>& other);
 
         // Destructor
         ~Tuple();
@@ -53,77 +53,74 @@ namespace Emblate
         void clear();
 
     private:
-        // Pointer to first element
-        T* _data;
-
-        // Number of elements ( = capacity)
-        size_t _size;
+        T* m_data;
+        size_t m_size;
     };
 
     template<typename T>
     Tuple<T>::Tuple()
-            : _data(0), _size(0)
+            : m_data(0), m_size(0)
     {
     }
 
     template<typename T>
     Tuple<T>::Tuple(size_t size)
-            : _data(new T[size]), _size(size)
+            : m_data(new T[size]), m_size(size)
     {
-        for (size_t i = 0; i < _size; i++)
+        for (size_t i = 0; i < m_size; i++)
         {
-            _data[i] = T();
+            m_data[i] = T();
         }
     }
 
     template<typename T>
     Tuple<T>::Tuple(size_t size, const T& value)
-            : _data(new T[size]), _size(size)
+            : m_data(new T[size]), m_size(size)
     {
-        for (size_t i = 0; i < _size; i++)
+        for (size_t i = 0; i < m_size; i++)
         {
-            _data[i] = value;
+            m_data[i] = value;
         }
     }
 
     template<typename T>
     Tuple<T>::Tuple(const T* array, size_t size)
-            : _data(new T[size]), _size(size)
+            : m_data(new T[size]), m_size(size)
     {
-        for (size_t i = 0; i < _size; i++)
+        for (size_t i = 0; i < m_size; i++)
         {
-            _data[i] = array[i];
+            m_data[i] = array[i];
         }
     }
 
     template<class T>
-    Tuple<T>::Tuple(const Tuple<T>& tuple_)
-            : _data(new T[tuple_._size]), _size(tuple_._size)
+    Tuple<T>::Tuple(const Tuple<T>& other)
+            : m_data(new T[other.m_size]), m_size(other.m_size)
     {
-        for (size_t i = 0; i < tuple_._size; i++)
+        for (size_t i = 0; i < other.m_size; i++)
         {
-            _data[i] = tuple_._data[i];
+            m_data[i] = other.m_data[i];
         }
     }
 
     template<typename T>
-    Tuple<T>& Tuple<T>::operator=(const Tuple<T>& tuple_)
+    Tuple<T>& Tuple<T>::operator=(const Tuple<T>& other)
     {
         // Self-assignment
-        if (this == &tuple_) return *this;
+        if (this == &other) return *this;
 
         // Memory reallocation
-        if (tuple_._size != _size)
+        if (other.m_size != m_size)
         {
-            delete[] _data;
-            _data = new T[tuple_._size];
-            _size = tuple_._size;
+            delete[] m_data;
+            m_data = new T[other.m_size];
+            m_size = other.m_size;
         }
 
         // Copy assignment
-        for (size_t i = 0; i < tuple_._size; i++)
+        for (size_t i = 0; i < other.m_size; i++)
         {
-            _data[i] = tuple_._data[i];
+            m_data[i] = other.m_data[i];
         }
 
         return *this;
@@ -132,65 +129,65 @@ namespace Emblate
     template<typename T>
     Tuple<T>::~Tuple()
     {
-        delete[] _data;
+        delete[] m_data;
     }
 
     template<class T>
     bool Tuple<T>::empty() const
     {
-        return (_size == 0);
+        return (m_size == 0);
     }
 
     template<typename T>
     size_t Tuple<T>::size()
     {
-        return _size;
+        return m_size;
     }
 
     template<class T>
     T& Tuple<T>::at(size_t i)
     {
-        if (i >= _size) throw out_of_range();
-        return _data[i];
+        if (i >= m_size) { throw out_of_range(); }
+        return m_data[i];
     }
 
     template<class T>
     const T& Tuple<T>::at(size_t i) const
     {
-        if (i >= _size) throw out_of_range();
-        return _data[i];
+        if (i >= m_size) { throw out_of_range(); }
+        return m_data[i];
     }
 
     template<class T>
     T& Tuple<T>::operator[](size_t i)
     {
-        return _data[i % _size];
+        return m_data[i % m_size];
     }
 
     template<class T>
     const T& Tuple<T>::operator[](size_t i) const
     {
-        return _data[i % _size];
+        return m_data[i % m_size];
     }
 
     template<class T>
     T* Tuple<T>::data()
     {
-        return _data;
+        return m_data;
     }
 
     template<class T>
     const T* Tuple<T>::data() const
     {
-        return _data;
+        return m_data;
     }
 
     template<typename T>
     void Tuple<T>::clear()
     {
-        for (size_t i = 0; i < _size; i++)
+        for (size_t i = 0; i < m_size; i++)
         {
-            _data[i] = T();
+            m_data[i] = T();
         }
     }
 }

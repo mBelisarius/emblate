@@ -11,26 +11,22 @@ namespace Emblate
     class HeapSort
     {
     public:
-        /*--- Constructors ---*/
-        HeapSort(Vector<T>& a);
-
-        /*--- Methods ---*/
+        explicit HeapSort(Vector<T>& a);
         size_t iParent(size_t i);
         size_t iLeftChild(size_t i);
         size_t iRightChild(size_t i);
-
         size_t leafSearch(size_t start, size_t end);
         void siftDown(size_t start, size_t end);
         void heapify();
         void sort();
 
     private:
-        Vector<T>& _a;
+        Vector<T>& m_a;
     };
 
     template<typename T>
     HeapSort<T>::HeapSort(Vector<T>& a)
-            : _a(a)
+            : m_a(a)
     {
     }
 
@@ -58,7 +54,7 @@ namespace Emblate
         size_t j = start;
         while (iRightChild(j) <= end)
         {
-            if (_a[iRightChild(j)] > _a[iLeftChild(j)])
+            if (m_a[iRightChild(j)] > m_a[iLeftChild(j)])
             {
                 j = iRightChild(j);
             }
@@ -78,13 +74,13 @@ namespace Emblate
     {
         size_t j = leafSearch(start, end);
 
-        while (_a[start] > _a[j]) { j = iParent(j); }
+        while (m_a[start] > m_a[j]) { j = iParent(j); }
 
-        T temp = _a[j];
-        _a[j] = _a[start];
+        T tmp = m_a[j];
+        m_a[j] = m_a[start];
         while (j > start)
         {
-            swap(_a[iParent(j)], temp);
+            swap(m_a[iParent(j)], tmp);
             j = iParent(j);
         }
     }
@@ -92,9 +88,9 @@ namespace Emblate
     template<typename T>
     void HeapSort<T>::heapify()
     {
-        for (size_t start = _a.size(); start > 0; start--)
+        for (size_t start = m_a.size(); start > 0; start--)
         {
-            siftDown(start - 1, _a.size() - 1);
+            siftDown(start - 1, m_a.size() - 1);
         }
     }
 
@@ -103,9 +99,9 @@ namespace Emblate
     {
         heapify();
 
-        for (size_t end = _a.size() - 1; end > 0; end--)
+        for (size_t end = m_a.size() - 1; end > 0; end--)
         {
-            _a.swap(end, 0);
+            m_a.swap(end, 0);
             siftDown(0, end - 1);
         }
     }

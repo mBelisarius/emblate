@@ -19,11 +19,11 @@ namespace Emblate
         Stack(const T* array, size_t size, bool reverse = false);
 
         // Copy constructor
-        Stack(Stack& stack_);
-        Stack(const Stack& queue_);
+        Stack(Stack& other);
+        Stack(const Stack& other);
 
         // Copy Assingment
-        Stack<T>& operator=(const Stack<T>& stack_);
+        Stack<T>& operator=(const Stack<T>& other);
 
         // Destructor
         ~Stack();
@@ -68,49 +68,48 @@ namespace Emblate
         T pop();
 
     private:
-        // List containing the data
-        List<T> _data;
+        List<T> m_data;
     };
 
     template<typename T>
     Stack<T>::Stack()
-            : _data(0)
+            : m_data(0)
     {
     }
 
     template<typename T>
     Stack<T>::Stack(size_t size, const T& value)
-            : _data(size, value)
+            : m_data(size, value)
     {
     }
 
     template<typename T>
     Stack<T>::Stack(const T* array, size_t size, bool reverse)
-            : _data(array, size, reverse)
+            : m_data(array, size, reverse)
     {
     }
 
     template<class T>
-    Stack<T>::Stack(Stack<T>& stack_)
-            : _data(stack_._data)
+    Stack<T>::Stack(Stack<T>& other)
+            : m_data(other.m_data)
     {
     }
 
     template<class T>
-    Stack<T>::Stack(const Stack<T>& stack_)
-            : _data(stack_._data)
+    Stack<T>::Stack(const Stack<T>& other)
+            : m_data(other.m_data)
     {
     }
 
     template<typename T>
-    Stack<T>& Stack<T>::operator=(const Stack<T>& stack_)
+    Stack<T>& Stack<T>::operator=(const Stack<T>& other)
     {
         // Self-assignment
-        if (this == &stack_) return *this;
+        if (this == &other) return *this;
 
         // Copy assignment
-        delete _data;
-        _data = new List<T>(stack_._data);
+        delete m_data;
+        m_data = new List<T>(other.m_data);
 
         return *this;
     }
@@ -118,99 +117,100 @@ namespace Emblate
     template<typename T>
     Stack<T>::~Stack()
     {
-        delete _data;
+        delete m_data;
     }
 
     template<class T>
     bool Stack<T>::empty() const
     {
-        return (size() == 0);
+        return size() == 0;
     }
 
     template<typename T>
     size_t Stack<T>::size()
     {
-        return _data.size();
+        return m_data.size();
     }
 
     template<class T>
     T& Stack<T>::at(size_t i)
     {
-        if (i >= size()) throw out_of_range();
-        return _data[i];
+        if (i >= size()) { throw out_of_range(); }
+        return m_data[i];
     }
 
     template<class T>
     const T& Stack<T>::at(size_t i) const
     {
-        if (i >= size()) throw out_of_range();
-        return _data[i];
+        if (i >= size()) { throw out_of_range(); }
+        return m_data[i];
     }
 
     template<class T>
     T& Stack<T>::operator[](size_t i)
     {
-        return _data[i];
+        return m_data[i];
     }
 
     template<class T>
     const T& Stack<T>::operator[](size_t i) const
     {
-        return _data[i];
+        return m_data[i];
     }
 
     template<class T>
     T& Stack<T>::front()
     {
-        return _data[0];
+        return m_data[0];
     }
 
     template<class T>
     const T& Stack<T>::front() const
     {
-        return _data[0];
+        return m_data[0];
     }
 
     template<class T>
     T& Stack<T>::back()
     {
-        return _data[size() - 1];
+        return m_data[size() - 1];
     }
 
     template<class T>
     const T& Stack<T>::back() const
     {
-        return _data[size() - 1];
+        return m_data[size() - 1];
     }
 
     template<class T>
     T* Stack<T>::data()
     {
-        return _data;
+        return m_data;
     }
 
     template<class T>
     const T* Stack<T>::data() const
     {
-        return _data;
+        return m_data;
     }
 
     template<typename T>
     void Stack<T>::clear()
     {
-        _data.clear();
+        m_data.clear();
     }
 
     template<typename T>
     void Stack<T>::push(T value)
     {
-        _data.push_back(value);
+        m_data.push_back(value);
     }
 
     template<typename T>
     T Stack<T>::pop()
     {
-        return _data.pop_back();
+        return m_data.pop_back();
     }
 }
+
 #endif /* EMBLATE_STACK_H */

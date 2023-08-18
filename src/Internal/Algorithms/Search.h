@@ -8,25 +8,26 @@
 namespace Emblate
 {
     template<typename T>
-    size_t
-    binarySearch(const Vector<T>& x, T t, size_t lowIndex, size_t highIndex)
+    size_t binarySearch(const Vector<T>& x, T t,
+                        size_t low_index, size_t high_index)
     {
         while (true)
         {
-            if (abs<size_t>(highIndex - lowIndex) <= 1)
+            if (abs<size_t>(high_index - low_index) <= 1)
             {
-                return abs<T>(t - x[highIndex]) > abs<T>(t - x[lowIndex])
-                       ? lowIndex
-                       : highIndex;
+                return abs<T>(t - x[high_index]) > abs<T>(t - x[low_index])
+                       ? low_index
+                       : high_index;
             }
 
-            size_t midIndex = (lowIndex + highIndex) / 2;
-            T mid = x[midIndex];
+            size_t mid_index = (low_index + high_index) / 2;
+            T mid = x[mid_index];
 
-            if (t > mid) { lowIndex = midIndex; }
-            if (t < mid) { highIndex = midIndex; }
-            if (t == mid) { return midIndex; }
+            if (t > mid) { low_index = mid_index; }
+            if (t < mid) { high_index = mid_index; }
+            if (t == mid) { return mid_index; }
         }
     }
 }
+
 #endif /* EMBLATE_SEARCH_H */

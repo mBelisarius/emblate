@@ -64,7 +64,7 @@ namespace Emblate
         void enqueue(T value);
 
         // Dequeue element
-        T dequeue();
+        void dequeue();
 
         // Enqueue element and dequeue
         void endequeue(T value);
@@ -216,9 +216,9 @@ namespace Emblate
     }
 
     template<typename T>
-    T Queue<T>::dequeue()
+    void Queue<T>::dequeue()
     {
-        return _data.pop_back();
+        _data.pop_back();
     }
 
     template<typename T>

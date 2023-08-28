@@ -1,5 +1,5 @@
-#include "../../src/Data"
-#include "../../src/Algorithms"
+#include "src/Data"
+#include "src/Algorithms"
 #include <gtest/gtest.h>
 
 TEST(HeapSortTest, SortPositives)

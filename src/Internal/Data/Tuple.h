@@ -10,46 +10,28 @@ namespace Emblate
     class Tuple
     {
     public:
-        /*--- Constructors ---*/
-        // Default constructor
         Tuple();
-
         Tuple(size_t size);
         Tuple(size_t size, const T& value);
         Tuple(const T* array, size_t size);
-
-        // Copy constructor
         Tuple(const Tuple& other);
 
-        // Copy Assingment
-        Tuple<T>& operator=(const Tuple<T>& other);
-
-        // Destructor
         ~Tuple();
 
-        /*--- Memory ---*/
-        // Returns True if this vector is empty
-        bool empty() const;
+        Tuple<T>& operator=(const Tuple<T>& other);
 
-        // Return the size (number of elements)
+        bool empty() const;
         size_t size();
 
-        /*--- Data acess ---*/
-        // Access elements with bounds checking
         T& at(size_t i);
         const T& at(size_t i) const;
 
-        // Access elements (no bounds checking)
         T& operator[](size_t i);
         const T& operator[](size_t i) const;
 
-        // Returns a pointer to the array used by this vector
         T* data();
         const T* data() const;
 
-        /*--- Modifiers ---*/
-        // Removes all elements
-        // Size is not changed
         void clear();
 
     private:
@@ -59,9 +41,7 @@ namespace Emblate
 
     template<typename T>
     Tuple<T>::Tuple()
-            : m_data(0), m_size(0)
-    {
-    }
+            : m_data(0), m_size(0) {}
 
     template<typename T>
     Tuple<T>::Tuple(size_t size)
@@ -104,6 +84,12 @@ namespace Emblate
     }
 
     template<typename T>
+    Tuple<T>::~Tuple()
+    {
+        delete[] m_data;
+    }
+
+    template<typename T>
     Tuple<T>& Tuple<T>::operator=(const Tuple<T>& other)
     {
         // Self-assignment
@@ -124,12 +110,6 @@ namespace Emblate
         }
 
         return *this;
-    }
-
-    template<typename T>
-    Tuple<T>::~Tuple()
-    {
-        delete[] m_data;
     }
 
     template<class T>

@@ -7,6 +7,11 @@
 
 namespace Emblate
 {
+    /**
+     * In-place heapSort.
+     *
+     * @tparam T The type of the elements.
+     */
     template<typename T>
     class HeapSort
     {
@@ -24,30 +29,35 @@ namespace Emblate
         Vector<T>& m_a;
     };
 
+    // TODO: Documentation
     template<typename T>
     HeapSort<T>::HeapSort(Vector<T>& a)
             : m_a(a)
     {
     }
 
+    // TODO: Documentation
     template<typename T>
     inline size_t HeapSort<T>::iParent(size_t i)
     {
         return floor((i - 1) / 2);
     }
 
+    // TODO: Documentation
     template<typename T>
     inline size_t HeapSort<T>::iLeftChild(size_t i)
     {
         return 2 * i + 1;
     }
 
+    // TODO: Documentation
     template<typename T>
     inline size_t HeapSort<T>::iRightChild(size_t i)
     {
         return 2 * i + 2;
     }
 
+    // TODO: Documentation
     template<typename T>
     inline size_t HeapSort<T>::leafSearch(size_t start, size_t end)
     {
@@ -69,6 +79,7 @@ namespace Emblate
         return j;
     }
 
+    // TODO: Documentation
     template<typename T>
     void HeapSort<T>::siftDown(size_t start, size_t end)
     {
@@ -85,6 +96,7 @@ namespace Emblate
         }
     }
 
+    // TODO: Documentation
     template<typename T>
     void HeapSort<T>::heapify()
     {
@@ -94,6 +106,7 @@ namespace Emblate
         }
     }
 
+    // TODO: Documentation
     template<typename T>
     void HeapSort<T>::sort()
     {

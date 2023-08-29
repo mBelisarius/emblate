@@ -3,8 +3,17 @@
 
 namespace Emblate
 {
+    /**
+     * Defines a type of object to be thrown as exception. It reports
+     * errors for missing code implementations.
+     */
     struct not_implemented {};
 
+    /**
+     * Defines a type of object to be thrown as exception. It reports
+     * errors that are consequence of attempt to access elements out of
+     * defined range.
+     */
     struct out_of_range {};
 }
 

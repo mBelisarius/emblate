@@ -7,25 +7,36 @@
 
 namespace Emblate
 {
+    /**
+     * Search through a sorted array. It is implemented as a binary
+     * search algorithm.
+     *
+     * @tparam T The type of the elements.
+     * @param arr Array to search in.
+     * @param val Value to search for.
+     * @param lower_index Lower limit index.
+     * @param upper_index Upper limit index.
+     * @return Position in the array where the value is equal to _t_.
+     */
     template<typename T>
-    size_t binarySearch(const Vector<T>& x, T t,
-                        size_t low_index, size_t high_index)
+    size_t binarySearch(const Vector<T>& arr, T val,
+                        size_t lower_index, size_t upper_index)
     {
         while (true)
         {
-            if (abs<size_t>(high_index - low_index) <= 1)
+            if (abs<size_t>(upper_index - lower_index) <= 1)
             {
-                return abs<T>(t - x[high_index]) > abs<T>(t - x[low_index])
-                       ? low_index
-                       : high_index;
+                return abs<T>(val - arr[upper_index]) > abs<T>(val - arr[lower_index])
+                       ? lower_index
+                       : upper_index;
             }
 
-            size_t mid_index = (low_index + high_index) / 2;
-            T mid = x[mid_index];
+            size_t mid_index = (lower_index + upper_index) / 2;
+            T mid = arr[mid_index];
 
-            if (t > mid) { low_index = mid_index; }
-            if (t < mid) { high_index = mid_index; }
-            if (t == mid) { return mid_index; }
+            if (val > mid) { lower_index = mid_index; }
+            if (val < mid) { upper_index = mid_index; }
+            if (val == mid) { return mid_index; }
         }
     }
 }

@@ -7,6 +7,12 @@
 
 namespace Emblate
 {
+    /**
+     * Container adaptor that gives the functionality of a queue.
+     * Specifically, a FIFO (first-in, first-out) data structure.
+     *
+     * @tparam T The type of the elements.
+     */
     template<typename T>
     class Queue : List<T>
     {
@@ -52,18 +58,19 @@ namespace Emblate
     };
 
     /**
-     * Default constructor for a new empty queue.
+     * Default constructor. Constructs an empty container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      */
     template<typename T>
     Queue<T>::Queue()
             : m_data() {}
 
     /**
-     * Constructor for a new queue with given size filled with _value_.
+     * Constructs the container with given size _size_ filled with
+     * _value_.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param size Initial size.
      * @param value Initial value.
      */
@@ -72,9 +79,10 @@ namespace Emblate
             : m_data(size, value) {}
 
     /**
-     * Constructor for a new queue copied from a plain C-style array.
+     * Constructs the container by copying the elements of a plain
+     * C-style array.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param array Plain C-style array.
      * @param size Size of the base array.
      * @param reverse Reverse the order in which the elements appear.
@@ -84,29 +92,31 @@ namespace Emblate
             : m_data(array, size, reverse) {}
 
     /**
-     * Copy constructor for a new queue.
+     * Copy constructor. Constructs the container with the copy of the
+     * contents of other.
      *
-     * @tparam T Values data type.
-     * @param other Queue to be copied.
+     * @tparam T The type of the elements.
+     * @param other Container to be copied.
      */
     template<class T>
     Queue<T>::Queue(Queue<T>& other)
             : m_data(other.m_data) {}
 
     /**
-     * Copy constructor for a new queue.
+     * Copy constructor. Constructs the container with the copy of the
+     * contents of other.
      *
-     * @tparam T Values data type.
-     * @param other Queue to be copied.
+     * @tparam T The type of the elements.
+     * @param other Container to be copied.
      */
     template<class T>
     Queue<T>::Queue(const Queue<T>& other)
             : m_data(other.m_data) {}
 
     /**
-     * Destructor for a queue object.
+     * Destructs the container object.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      */
     template<typename T>
     Queue<T>::~Queue()
@@ -117,9 +127,9 @@ namespace Emblate
     /**
      * Copy assignment.
      *
-     * @tparam T Values data type.
-     * @param other Queue to be copied.
-     * @return Copied queue.
+     * @tparam T The type of the elements.
+     * @param other Container to be copied.
+     * @return Copied container.
      */
     template<typename T>
     Queue<T>& Queue<T>::operator=(const Queue<T>& other)
@@ -137,7 +147,7 @@ namespace Emblate
     /**
      * Checks whether the container is empty.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @return True if the container is empty, false otherwise.
      */
     template<class T>
@@ -149,7 +159,7 @@ namespace Emblate
     /**
      * Returns the number of elements in the container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @return The number of elements.
      */
     template<typename T>
@@ -161,7 +171,7 @@ namespace Emblate
     /**
      * Access specified element with bounds checking.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param pos Position of the element to return.
      * @return Reference to the requested element.
      */
@@ -175,7 +185,7 @@ namespace Emblate
     /**
      * Access specified element with bounds checking.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param pos Position of the element to return.
      * @return Reference to the requested element.
      */
@@ -189,7 +199,7 @@ namespace Emblate
     /**
      * Access specified element.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param pos Position of the element to return.
      * @return Reference to the requested element.
      */
@@ -202,7 +212,7 @@ namespace Emblate
     /**
      * Access specified element.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param pos Position of the element to return.
      * @return Reference to the requested element.
      */
@@ -215,7 +225,7 @@ namespace Emblate
     /**
      * Returns a reference to the first element in the container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @return Reference to the first element.
      */
     template<class T>
@@ -227,7 +237,7 @@ namespace Emblate
     /**
      * Returns a reference to the first element in the container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @return Reference to the first element.
      */
     template<class T>
@@ -239,7 +249,7 @@ namespace Emblate
     /**
      * Returns a reference to the last element in the container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @return Reference to the last element.
      */
     template<class T>
@@ -251,7 +261,7 @@ namespace Emblate
     /**
      * Returns a reference to the last element in the container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @return Reference to the last element.
      */
     template<class T>
@@ -261,10 +271,11 @@ namespace Emblate
     }
 
     /**
-     * Returns a reference to the base container used by the queue.
+     * Returns a reference to the underlying container serving as
+     * element storage.
      *
-     * @tparam T Values data type.
-     * @return Reference to the base container.
+     * @tparam T The type of the elements.
+     * @return Reference to the underlying container.
      */
     template<class T>
     T* Queue<T>::data()
@@ -273,10 +284,11 @@ namespace Emblate
     }
 
     /**
-     * Returns a reference to the base container used by the queue.
+     * Returns a reference to the underlying container serving as
+     * element storage.
      *
-     * @tparam T Values data type.
-     * @return Reference to the base container.
+     * @tparam T The type of the elements.
+     * @return Reference to the underlying container.
      */
     template<class T>
     const T* Queue<T>::data() const
@@ -285,10 +297,10 @@ namespace Emblate
     }
 
     /**
-     * Erases all elements from the container. After this call, size() returns
-     * zero.
+     * Erases all elements from the container. After this call, size()
+     * returns zero.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      */
     template<typename T>
     void Queue<T>::clear()
@@ -297,9 +309,10 @@ namespace Emblate
     }
 
     /**
-     * Prepends the given element value to the beginning of the container.
+     * Prepends the given element value to the beginning of the
+     * container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param value Value of the element to prepend.
      */
     template<typename T>
@@ -311,7 +324,7 @@ namespace Emblate
     /**
      * Removes the last element of the container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      */
     template<typename T>
     T Queue<T>::pop()
@@ -322,7 +335,7 @@ namespace Emblate
     /**
      * Simultaneously push and pop an element.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param value Value of the element to push.
      */
     template<typename T>
@@ -332,10 +345,10 @@ namespace Emblate
     }
 
     /**
-     * Simultaneously push and pop an element if the size of the container is
-     * greater then _maxsize_.
+     * Simultaneously push and pop an element if the size of the
+     * container is greater then _maxsize_.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param value Value of the element to push.
      */
     template<typename T>

@@ -7,6 +7,12 @@
 
 namespace Emblate
 {
+    /**
+     * Container adaptor that gives the functionality of a stack.
+     * Specifically, a LIFO (last-in, first-out) data structure.
+     *
+     * @tparam T The type of the elements.
+     */
     template<typename T>
     class Stack : List<T>
     {
@@ -49,18 +55,19 @@ namespace Emblate
     };
 
     /**
-     * Default constructor for a new empty stack.
+     * Default constructor. Construct an empty container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      */
     template<typename T>
     Stack<T>::Stack()
             : m_data() {}
 
     /**
-     * Constructor for a new stack with given size filled with _value_.
+     * Constructs the container with given size _size_ filled with
+     * _value_.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param size Initial size.
      * @param value Initial value.
      */
@@ -69,9 +76,10 @@ namespace Emblate
             : m_data(size, value) {}
 
     /**
-     * Constructor for a new stack copied from a plain C-style array.
+     * Constructs the container by copying the elements of a plain
+     * C-style array.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param array Plain C-style array.
      * @param size Size of the base array.
      * @param reverse Reverse the order in which the elements appear.
@@ -81,29 +89,31 @@ namespace Emblate
             : m_data(array, size, reverse) {}
 
     /**
-     * Copy constructor for a new stack.
+     * Copy constructor. Constructs the container with the copy of the
+     * contents of other.
      *
-     * @tparam T Values data type.
-     * @param other Stack to be copied.
+     * @tparam T The type of the elements.
+     * @param other Container to be copied.
      */
     template<class T>
     Stack<T>::Stack(Stack<T>& other)
             : m_data(other.m_data) {}
 
     /**
-     * Copy constructor for a new stack.
+     * Copy constructor. Constructs the container with the copy of the
+     * contents of other.
      *
-     * @tparam T Values data type.
-     * @param other Stack to be copied.
+     * @tparam T The type of the elements.
+     * @param other Container to be copied.
      */
     template<class T>
     Stack<T>::Stack(const Stack<T>& other)
             : m_data(other.m_data) {}
 
     /**
-     * Destructor for a stack object.
+     * Destructs the container object.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      */
     template<typename T>
     Stack<T>::~Stack()
@@ -114,9 +124,9 @@ namespace Emblate
     /**
      * Copy assignment.
      *
-     * @tparam T Values data type.
-     * @param other Stack to be copied.
-     * @return Copied stack.
+     * @tparam T The type of the elements.
+     * @param other Container to be copied.
+     * @return Copied container.
      */
     template<typename T>
     Stack<T>& Stack<T>::operator=(const Stack<T>& other)
@@ -134,7 +144,7 @@ namespace Emblate
     /**
      * Checks whether the container is empty.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @return True if the container is empty, false otherwise.
      */
     template<class T>
@@ -146,7 +156,7 @@ namespace Emblate
     /**
      * Returns the number of elements in the container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @return The number of elements.
      */
     template<typename T>
@@ -158,7 +168,7 @@ namespace Emblate
     /**
      * Access specified element with bounds checking.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param pos Position of the element to return.
      * @return Reference to the requested element.
      */
@@ -172,7 +182,7 @@ namespace Emblate
     /**
      * Access specified element with bounds checking.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param pos Position of the element to return.
      * @return Reference to the requested element.
      */
@@ -186,7 +196,7 @@ namespace Emblate
     /**
      * Access specified element with bounds checking.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param pos Position of the element to return.
      * @return Reference to the requested element.
      */
@@ -199,7 +209,7 @@ namespace Emblate
     /**
      * Access specified element with bounds checking.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param pos Position of the element to return.
      * @return Reference to the requested element.
      */
@@ -212,7 +222,7 @@ namespace Emblate
     /**
      * Returns a reference to the first element in the container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @return Reference to the first element.
      */
     template<class T>
@@ -224,7 +234,7 @@ namespace Emblate
     /**
      * Returns a reference to the first element in the container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @return Reference to the first element.
      */
     template<class T>
@@ -236,7 +246,7 @@ namespace Emblate
     /**
      * Returns a reference to the last element in the container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @return Reference to the last element.
      */
     template<class T>
@@ -248,7 +258,7 @@ namespace Emblate
     /**
      * Returns a reference to the last element in the container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @return Reference to the last element.
      */
     template<class T>
@@ -258,10 +268,11 @@ namespace Emblate
     }
 
     /**
-     * Returns a reference to the base container used by the queue.
+     * Returns a reference to the underlying container serving as
+     * element storage.
      *
-     * @tparam T Values data type.
-     * @return Reference to the base container.
+     * @tparam T The type of the elements.
+     * @return Reference to the underlying container.
      */
     template<class T>
     T* Stack<T>::data()
@@ -270,10 +281,11 @@ namespace Emblate
     }
 
     /**
-     * Returns a reference to the base container used by the queue.
+     * Returns a reference to the underlying container serving as
+     * element storage.
      *
-     * @tparam T Values data type.
-     * @return Reference to the base container.
+     * @tparam T The type of the elements.
+     * @return Reference to the underlying container.
      */
     template<class T>
     const T* Stack<T>::data() const
@@ -282,9 +294,10 @@ namespace Emblate
     }
 
     /**
-     * Erases all elements from the container. After this call, size() returns zero.
+     * Erases all elements from the container. After this call, size()
+     * returns zero.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      */
     template<typename T>
     void Stack<T>::clear()
@@ -295,7 +308,7 @@ namespace Emblate
     /**
      * Appends the given element value to the end of the container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param value Value of the element to append.
      */
     template<typename T>
@@ -307,7 +320,7 @@ namespace Emblate
     /**
      * Removes the last element of the container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      */
     template<typename T>
     T Stack<T>::pop()

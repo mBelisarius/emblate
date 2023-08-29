@@ -6,6 +6,15 @@
 
 namespace Emblate
 {
+    /**
+     * Container where the elements are stored contiguously, which means
+     * that elements can be accessed not only through iterators, but
+     * also using offsets to regular pointers to elements. This means
+     * that a pointer to an element of a vector may be passed to any
+     * function that expects a pointer to an element of an array.
+     *
+     * @tparam T The type of the elements.
+     */
     template<typename T>
     class Vector
     {
@@ -20,55 +29,33 @@ namespace Emblate
 
         Vector<T>& operator=(const Vector<T>& other);
 
-        /*--- Memory ---*/
-        // Requests an increase in capacity
         void reserve(size_t capacity);
-
-        // Reduces capacity to fit the size
         void shrink_to_fit();
 
-        // Returns True if this vector is empty
         bool empty() const;
-
-        // Return the size (number of elements)
         size_t size();
-
-        // Return the total capacity (allocated memory)
         size_t capacity();
 
-        /*--- Data acess ---*/
-        // Access elements with bounds checking
         T& at(size_t pos);
         const T& at(size_t pos) const;
 
-        // Access elements (no bounds checking)
         T& operator[](size_t pos);
         const T& operator[](size_t pos) const;
 
-        // Returns a reference to the first element
         T& front();
         const T& front() const;
 
-        // Returns a reference to the last element
         T& back();
         const T& back() const;
 
-        // Returns a pointer to the array used by this vector
         T* data();
         const T* data() const;
 
-        /*--- Modifiers ---*/
-        // Removes all elements
-        // Capacity is not changed
         void clear();
 
-        // Inserts element at the back
         void push_back(T value);
-
-        // Removes the last (back) element
         T pop_back();
 
-        // Swap two elements
         void swap(size_t pos1, size_t pos2);
 
     private:
@@ -78,18 +65,19 @@ namespace Emblate
     };
 
     /**
-     * Default constructor for a new empty vector.
+     * Default constructor. Constructs an empty container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      */
     template<typename T>
     Vector<T>::Vector()
             : m_data(), m_size(), m_capacity() {}
 
     /**
-     * Constructor for a new list with given size and unitialized elements.
+     * Constructs the container with given size _size_ and unitialized
+     * elements.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param size Initial size.
      */
     template<typename T>
@@ -103,9 +91,10 @@ namespace Emblate
     }
 
     /**
-     * Constructor for a new vector with given size filled with _value_.
+     * Constructs the container with given size _size_ filled with
+     * _value_.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param size Initial size.
      * @param value Initial value.
      */
@@ -120,9 +109,10 @@ namespace Emblate
     }
 
     /**
-     * Constructor for a new vector copied from a plain C-style array.
+     * Constructs the container by copying the elements of a plain
+     * C-style array.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param array Plain C-style array.
      * @param size Size of the base array.
      * @param reverse Reverse the order in which the elements appear.
@@ -138,10 +128,11 @@ namespace Emblate
     }
 
     /**
-     * Copy constructor for a new vector.
+     * Copy constructor. Constructs the container with the copy of the
+     * contents of other.
      *
-     * @tparam T Values data type.
-     * @param other Vector to be copied.
+     * @tparam T The type of the elements.
+     * @param other Container to be copied.
      */
     template<class T>
     Vector<T>::Vector(const Vector<T>& other)
@@ -155,9 +146,9 @@ namespace Emblate
     }
 
     /**
-     * Destructor for a vector object.
+     * Destructs the container object.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      */
     template<typename T>
     Vector<T>::~Vector()
@@ -168,9 +159,9 @@ namespace Emblate
     /**
      * Copy assignment.
      *
-     * @tparam T Values data type.
-     * @param other Vector to be copied.
-     * @return Copied vector.
+     * @tparam T The type of the elements.
+     * @param other Container to be copied.
+     * @return Copied container.
      */
     template<typename T>
     Vector<T>& Vector<T>::operator=(const Vector<T>& other)
@@ -198,12 +189,13 @@ namespace Emblate
     }
 
     /**
-     * Increase the capacity of the vector (the total number of elements that
-     * the vector can hold without requiring reallocation) to a value that's
-     * greater or equal to new_cap.
+     * Increase the capacity of the container (the total number of
+     * elements that the vector can hold without requiring reallocation)
+     * to a value that's greater or equal to _capacity_.
      *
-     * @tparam T Values data type.
-     * @param capacity	New capacity of the vector, in number of elements.
+     * @tparam T The type of the elements.
+     * @param capacity	New capacity of the container, in number of
+     * elements.
      */
     template<class T>
     void Vector<T>::reserve(size_t capacity)
@@ -232,7 +224,7 @@ namespace Emblate
     /**
      * Requests the removal of unused capacity.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      */
     template<class T>
     void Vector<T>::shrink_to_fit()
@@ -256,7 +248,7 @@ namespace Emblate
     /**
      * Checks whether the container is empty.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @return True if the container is empty, false otherwise.
      */
     template<class T>
@@ -268,7 +260,7 @@ namespace Emblate
     /**
      * Returns the number of elements in the container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @return The number of elements.
      */
     template<typename T>
@@ -281,9 +273,9 @@ namespace Emblate
      * Returns the number of elements that the container has currently
      * allocated space for.
      *
-     * @tparam T Values data type.
-     * @return The number of elements that can be held in currently allocated
-     * storage.
+     * @tparam T The type of the elements.
+     * @return The number of elements that can be held in currently
+     * allocated storage.
      */
     template<typename T>
     size_t Vector<T>::capacity()
@@ -294,7 +286,7 @@ namespace Emblate
     /**
      * Access specified element with bounds checking.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param pos Position of the element to return.
      * @return Reference to the requested element.
      */
@@ -308,7 +300,7 @@ namespace Emblate
     /**
      * Access specified element with bounds checking.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param pos Position of the element to return.
      * @return Reference to the requested element.
      */
@@ -322,7 +314,7 @@ namespace Emblate
     /**
      * Access specified element.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param pos Position of the element to return.
      * @return Reference to the requested element.
      */
@@ -335,7 +327,7 @@ namespace Emblate
     /**
      * Access specified element.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param pos Position of the element to return.
      * @return Reference to the requested element.
      */
@@ -348,7 +340,7 @@ namespace Emblate
     /**
      * Returns a reference to the first element in the container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @return Reference to the first element.
      */
     template<class T>
@@ -360,7 +352,7 @@ namespace Emblate
     /**
      * Returns a reference to the first element in the container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @return Reference to the first element.
      */
     template<class T>
@@ -372,7 +364,7 @@ namespace Emblate
     /**
      * Returns a reference to the last element in the container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @return Reference to the last element.
      */
     template<class T>
@@ -384,7 +376,7 @@ namespace Emblate
     /**
      * Returns a reference to the last element in the container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @return Reference to the last element.
      */
     template<class T>
@@ -396,10 +388,10 @@ namespace Emblate
     /**
      * Direct access to the underlying array serving as element storage.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @return Pointer to the underlying element storage. For non-empty
-     * containers, the returned pointer compares equal to the address of the
-     * first element.
+     * containers, the returned pointer compares equal to the address of
+     * the first element.
      */
     template<class T>
     T* Vector<T>::data()
@@ -410,10 +402,10 @@ namespace Emblate
     /**
      * Direct access to the underlying array serving as element storage.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @return Pointer to the underlying element storage. For non-empty
-     * containers, the returned pointer compares equal to the address of the
-     * first element.
+     * containers, the returned pointer compares equal to the address of
+     * the first element.
      */
     template<class T>
     const T* Vector<T>::data() const
@@ -422,10 +414,10 @@ namespace Emblate
     }
 
     /**
-     * Erases all elements from the container. After this call, size() returns
-     * zero.
+     * Erases all elements from the container. After this call, size()
+     * ns zero.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      */
     template<typename T>
     void Vector<T>::clear()
@@ -439,7 +431,7 @@ namespace Emblate
     /**
      * Appends the given element value to the end of the container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param value Value of the element to append.
      */
     template<typename T>
@@ -455,7 +447,7 @@ namespace Emblate
     /**
      * Removes the last element of the container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      */
     template<typename T>
     T Vector<T>::pop_back()
@@ -467,7 +459,7 @@ namespace Emblate
     /**
      * Swaps two elements in the container.
      *
-     * @tparam T Values data type.
+     * @tparam T The type of the elements.
      * @param pos1 Position of the first element to swap.
      * @param pos2 Position of the second element to swap.
      */

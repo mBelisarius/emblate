@@ -14,6 +14,13 @@ namespace Emblate
     template<class Elem>
     struct Node
     {
+        /**
+         * Costructor.
+         *
+         * @param value_ Value to assign to the node.
+         * @param prev_ Previous node pointer.
+         * @param next_ Next node pointer.
+         */
         explicit Node(const Elem& value_ = Elem(), Node* prev_ = 0,
                       Node* next_ = 0)
                 : prev(prev_), next(next_), value(value_) {}
@@ -24,7 +31,7 @@ namespace Emblate
     };
 
     /**
-     *  container that supports constant time insertion and removal of
+     *  Container that supports constant time insertion and removal of
      *  elements from anywhere in the container. Fast random access is
      *  not supported. It is implemented as a doubly-linked list.
      *
@@ -87,7 +94,7 @@ namespace Emblate
     };
 
     /**
-     * Default constructor for a new empty list.
+     * Default constructor. Constructs an empty container.
      *
      * @tparam T The type of the elements.
      */
@@ -101,7 +108,8 @@ namespace Emblate
     }
 
     /**
-     * Constructor for a new list with given size filled with _value_.
+     * Constructs the container with given size _size_ filled with
+     * _value_.
      *
      * @tparam T The type of the elements.
      * @param size Initial size.
@@ -122,7 +130,8 @@ namespace Emblate
     }
 
     /**
-     * Constructor for a new list copied from a plain C-style array.
+     * Constructs the container by copying the elements of a plain
+     * C-style array.
      *
      * @tparam T The type of the elements.
      * @param array Plain C-style array.
@@ -155,10 +164,11 @@ namespace Emblate
     }
 
     /**
-     * Copy constructor for a new list.
+     * Copy constructor. Constructs the container with the copy of the
+     * contents of other.
      *
      * @tparam T The type of the elements.
-     * @param other List to be copied.
+     * @param other Container to be copied.
      */
     template<typename T>
     List<T>::List(const List<T>& other)
@@ -177,7 +187,7 @@ namespace Emblate
     }
 
     /**
-     * Destructor for a list object.
+     * Destructs the container object.
      *
      * @tparam T The type of the elements.
      */
@@ -191,8 +201,8 @@ namespace Emblate
      * Copy assignment.
      *
      * @tparam T The type of the elements.
-     * @param other List to be copied.
-     * @return Copied list.
+     * @param other Container to be copied.
+     * @return Copied container.
      */
     template<typename T>
     List<T>& List<T>::operator=(const List<T>& other)

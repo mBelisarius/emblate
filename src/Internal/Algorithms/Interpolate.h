@@ -9,55 +9,76 @@
 
 namespace Emblate
 {
+    /**
+     * One-dimensional interpolation methods over a data grid.
+     *
+     * @tparam T The type of the elements.
+     */
     template<typename T>
     class Interp1d
     {
     public:
-        /*--- Constructors ---*/
-        Interp1d(Vector<T> x, Vector<T> y,
-                 bool checkBounds = false,
-                 bool assumeSorted = false);
+        Interp1d(Vector<T> xp, Vector<T> yp,
+                 bool check_bounds = false,
+                 bool assume_sorted = false);
 
-        /*--- Methods ---*/
-        T linear(T t);
+        T linear(T x);
 
     private:
-        Vector<T> _x;
-        Vector<T> _y;
-        size_t _size;
-        bool _checkBounds;
-        bool _assumeSorted;
+        Vector<T> m_x;
+        Vector<T> m_y;
+        size_t m_size;
+        bool m_check_bounds;
+        bool m_assume_sorted;
 
     };
 
+    /**
+     * Constructs a grid data with x- and y-coordinates.
+     *
+     * @tparam T The type of the elements.
+     * @param xp The x-coordinates of the data points, must be sorted if
+     * _assume_sorted_ is True. Otherwise, xp is internally sorted.
+     * @param yp The y-coordinates of the data points, same length as xp.
+     * @param check_bounds Check _x_ bounds to interpolate.
+     * @param assume_sorted Assume the _x_ array is sorted.
+     */
     template<typename T>
-    Interp1d<T>::Interp1d(Vector<T> x, Vector<T> y,
-                          bool checkBounds,
-                          bool assumeSorted)
-            : _x(x), _y(y),
-              _checkBounds(checkBounds),
-              _assumeSorted(assumeSorted)
+    Interp1d<T>::Interp1d(Vector<T> xp, Vector<T> yp,
+                          bool check_bounds,
+                          bool assume_sorted)
+            : m_x(xp), m_y(yp),
+              m_check_bounds(check_bounds),
+              m_assume_sorted(assume_sorted)
     {
-        if (_x.size() != _y.size()) { throw; }
-        _size = _x.size();
+        // TODO: Exception
+        if (m_x.size() != m_y.size()) { throw; }
+        m_size = m_x.size();
 
         // TODO: Implement sorting algorithms
-        if (!_assumeSorted)
+        if (!m_assume_sorted)
         {
             throw not_implemented();
         }
     }
 
+    /**
+     * Linear interpolation.
+     *
+     * @tparam T The type of the elements.
+     * @param x The x-coordinates at which to evaluate the interpolated values.
+     * @return Interpolated value.
+     */
     template<typename T>
-    T Interp1d<T>::linear(T t)
+    T Interp1d<T>::linear(T x)
     {
-        if (t < _x.front() || t > _x.back()) { throw; }
+        if (x < m_x.front() || x > m_x.back()) { throw; }
 
-        size_t i = binarySearch<T>(_x, t, 0, _size - 1);
-        if ((i == _size - 1) || (i != 0 && t < _x[i])) { i--; }
+        size_t i = binarySearch<T>(m_x, x, 0, m_size - 1);
+        if ((i == m_size - 1) || (i != 0 && x < m_x[i])) { i--; }
 
-        T dydx = ((_y[i + 1] - _y[i]) / (_x[i + 1] - _x[i]));
-        return _y[i] + dydx * (t - _x[i]);
+        T dydx = ((m_y[i + 1] - m_y[i]) / (m_x[i + 1] - m_x[i]));
+        return m_y[i] + dydx * (x - m_x[i]);
     }
 }
 

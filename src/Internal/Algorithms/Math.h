@@ -29,7 +29,7 @@ namespace Emblate
     template<typename T>
     inline T map(T val, T from_low, T from_high, T to_low, T to_high)
     {
-        return (x - from_min) * (to_max - to_min) / (from_max - from_min) + to_min;
+        return (val - from_low) * (to_high - to_low) / (from_high - from_low) + to_low;
     }
 }
 

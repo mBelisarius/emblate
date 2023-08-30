@@ -11,6 +11,12 @@ namespace Emblate
 
     /**
      * Defines a type of object to be thrown as exception. It reports
+     * errors that arise because an argument value has not been accepted.
+     */
+    struct invalid_argument {};
+
+    /**
+     * Defines a type of object to be thrown as exception. It reports
      * errors that are consequence of attempt to access elements out of
      * defined range.
      */

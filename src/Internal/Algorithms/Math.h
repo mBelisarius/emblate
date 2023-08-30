@@ -49,6 +49,17 @@ namespace Emblate
         return static_cast<size_t>(val);
     }
 
+    /**
+     * Re-maps a value from one range to another.
+     *
+     * @tparam T The type of the elements.
+     * @param val The value to map.
+     * @param from_low The lower bound of the value’s current range.
+     * @param from_high The upper bound of the value’s current range.
+     * @param to_low The lower bound of the value’s target range.
+     * @param to_high The upper bound of the value’s target range.
+     * @return
+     */
     template<typename T>
     inline T map(T val, T from_low, T from_high, T to_low, T to_high)
     {

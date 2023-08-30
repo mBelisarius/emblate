@@ -51,8 +51,7 @@ namespace Emblate
               m_check_bounds(check_bounds),
               m_assume_sorted(assume_sorted)
     {
-        // TODO: Exception
-        if (m_x.size() != m_y.size()) { throw; }
+        if (m_x.size() != m_y.size()) { throw invalid_argument(); }
         m_size = m_x.size();
 
         // TODO: Implement sorting algorithms

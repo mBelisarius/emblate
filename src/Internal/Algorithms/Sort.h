@@ -8,7 +8,7 @@
 namespace Emblate
 {
     /**
-     * In-place heapSort.
+     * In-place heapSort. It is implemented using bottom-up search.
      *
      * @tparam T The type of the elements.
      */
@@ -17,9 +17,9 @@ namespace Emblate
     {
     public:
         explicit HeapSort(Vector<T>& a);
-        size_t iParent(size_t i);
-        size_t iLeftChild(size_t i);
-        size_t iRightChild(size_t i);
+        size_t iParent(size_t pos);
+        size_t iLeftChild(size_t pos);
+        size_t iRightChild(size_t pos);
         size_t leafSearch(size_t start, size_t end);
         void siftDown(size_t start, size_t end);
         void heapify();
@@ -29,35 +29,68 @@ namespace Emblate
         Vector<T>& m_a;
     };
 
-    // TODO: Documentation
+    /**
+     * Constructs a object to be sorted.
+     *
+     * @tparam T The type of the elements.
+     * @param a Array to be sorted.
+     */
     template<typename T>
     HeapSort<T>::HeapSort(Vector<T>& a)
-            : m_a(a)
-    {
-    }
+            : m_a(a) {}
 
-    // TODO: Documentation
+    /**
+     * Get the index of the parent node of a heap.
+     *
+     * @tparam T The type of the elements.
+     * @param pos Index of current node.
+     * @return Index of the parent node.
+     */
     template<typename T>
-    inline size_t HeapSort<T>::iParent(size_t i)
+    inline size_t HeapSort<T>::iParent(size_t pos)
     {
-        return floor((i - 1) / 2);
+        return floor((pos - 1) / 2);
     }
 
-    // TODO: Documentation
+    /**
+     * Get the index of the left child node of a heap.
+     *
+     * @tparam T The type of the elements.
+     * @param pos Index of current node.
+     * @return Index of the left child node.
+     */
     template<typename T>
-    inline size_t HeapSort<T>::iLeftChild(size_t i)
+    inline size_t HeapSort<T>::iLeftChild(size_t pos)
     {
-        return 2 * i + 1;
+        return 2 * pos + 1;
     }
 
-    // TODO: Documentation
+    /**
+     * Gets the index of the right child node of a heap.
+     *
+     * @tparam T The type of the elements.
+     * @param pos Index of current node.
+     * @return Index of the right child node.
+     */
     template<typename T>
-    inline size_t HeapSort<T>::iRightChild(size_t i)
+    inline size_t HeapSort<T>::iRightChild(size_t pos)
     {
-        return 2 * i + 2;
+        return 2 * pos + 2;
     }
 
-    // TODO: Documentation
+    /**
+     * Gets the position where to insert _a[end]_.
+     *
+     * Finds the path of largest children to the leaf level of the tree
+     * (as if it were inserting −∞) using only one comparison per level.
+     * Then, from this leaf, it searches upward (using one comparison
+     * per level) for the correct position in that path to insert a[end].
+     *
+     * @tparam T The type of the elements.
+     * @param start Index of the node to start the search from.
+     * @param end Index of the node to end the search.
+     * @return Position in that path to insert _a[end]_.
+     */
     template<typename T>
     inline size_t HeapSort<T>::leafSearch(size_t start, size_t end)
     {
@@ -79,7 +112,13 @@ namespace Emblate
         return j;
     }
 
-    // TODO: Documentation
+    /**
+     * Sifts the new first element to its appropriate index in the heap.
+     *
+     * @tparam T The type of the elements.
+     * @param start Index of the node to start the search from.
+     * @param end Index of the node to end the search.
+     */
     template<typename T>
     void HeapSort<T>::siftDown(size_t start, size_t end)
     {
@@ -96,7 +135,12 @@ namespace Emblate
         }
     }
 
-    // TODO: Documentation
+    /**
+     * Builds a heap from an array by  sifting downward to establish the
+     * heap property in O(n) operations.
+     *
+     * @tparam T The type of the elements.
+     */
     template<typename T>
     void HeapSort<T>::heapify()
     {
@@ -106,7 +150,11 @@ namespace Emblate
         }
     }
 
-    // TODO: Documentation
+    /**
+     * Sort an array using the bottom-up heapSort algorithm.
+     *
+     * @tparam T The type of the elements.
+     */
     template<typename T>
     void HeapSort<T>::sort()
     {

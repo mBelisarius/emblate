@@ -3,262 +3,331 @@
 
 TEST(MathTest, AbsReturnTypeInt)
 {
+    using Emblate::abs;
+
     int x = 0;
 
-    EXPECT_EQ(typeid(int), typeid(Emblate::abs(x)));
+    EXPECT_EQ(typeid(int), typeid(abs(x)));
 }
 
 TEST(MathTest, AbsPositiveInt)
 {
+    using Emblate::abs;
+
     int x = 1;
     int expected = 1;
 
-    EXPECT_EQ(expected, Emblate::abs(x));
+    EXPECT_EQ(expected, abs(x));
 }
 
 TEST(MathTest, AbsNegativeInt)
 {
+    using Emblate::abs;
+
     int x = -1;
     int expected = 1;
 
-    EXPECT_EQ(expected, Emblate::abs(x));
+    EXPECT_EQ(expected, abs(x));
 }
 
 TEST(MathTest, AbsPositiveZeroInt)
 {
+    using Emblate::abs;
+
     int x = 0;
     int expected = 0;
 
-    EXPECT_EQ(expected, Emblate::abs(x));
+    EXPECT_EQ(expected, abs(x));
 }
 
 TEST(MathTest, AbsNegativeZeroInt)
 {
+    using Emblate::abs;
+
     int x = -0;
     int expected = 0;
 
-    EXPECT_EQ(expected, Emblate::abs(x));
+    EXPECT_EQ(expected, abs(x));
 }
 
 TEST(MathTest, AbsReturnTypeFloat)
 {
-    float x = 0;
+    using Emblate::abs;
 
-    EXPECT_EQ(typeid(float), typeid(Emblate::abs(x)));
+    float x = 0.0f;
+
+    EXPECT_EQ(typeid(float), typeid(abs(x)));
 }
 
 TEST(MathTest, AbsPositiveFloat)
 {
-    float x = 1.0;
-    float expected = 1.0;
+    using Emblate::abs;
 
-    EXPECT_EQ(expected, Emblate::abs(x));
+    float x = 1.0f;
+    float expected = 1.0f;
+
+    EXPECT_FLOAT_EQ(expected, abs(x));
 }
 
 TEST(MathTest, AbsNegativeFloat)
 {
-    float x = -1.0;
-    float expected = 1.0;
+    using Emblate::abs;
 
-    EXPECT_EQ(expected, Emblate::abs(x));
+    float x = -1.0f;
+    float expected = 1.0f;
+
+    EXPECT_FLOAT_EQ(expected, abs(x));
 }
 
 TEST(MathTest, AbsPositiveZeroFloat)
 {
-    float x = 0.0;
-    float expected = 0.0;
+    using Emblate::abs;
 
-    EXPECT_EQ(expected, Emblate::abs(x));
+    float x = 0.0f;
+    float expected = 0.0f;
+
+    EXPECT_FLOAT_EQ(expected, abs(x));
 }
 
 TEST(MathTest, AbsNegativeZeroFloat)
 {
-    float x = -0.0;
-    float expected = 0.0;
+    using Emblate::abs;
 
-    EXPECT_EQ(expected, Emblate::abs(x));
+    float x = -0.0f;
+    float expected = 0.0f;
+
+    EXPECT_FLOAT_EQ(expected, abs(x));
 }
 
 TEST(MathTest, FloorReturnTypeInt)
 {
+    using Emblate::floor;
+
     int x = 0;
 
-    EXPECT_EQ(typeid(int), typeid(Emblate::floor(x)));
+    EXPECT_EQ(typeid(int), typeid(floor(x)));
 }
 
 TEST(MathTest, FloorPositiveInt)
 {
+    using Emblate::floor;
+
     int x = 1;
     int expected = 1;
 
-    EXPECT_EQ(expected, Emblate::floor(x));
+    EXPECT_EQ(expected, floor(x));
 }
 
 TEST(MathTest, FloorNegativeInt)
 {
+    using Emblate::floor;
+
     int x = -1;
     int expected = -1;
 
-    EXPECT_EQ(expected, Emblate::floor(x));
+    EXPECT_EQ(expected, floor(x));
 }
 
 TEST(MathTest, FloorPositiveZeroInt)
 {
+    using Emblate::floor;
+
     int x = 0;
     int expected = 0;
 
-    EXPECT_EQ(expected, Emblate::floor(x));
+    EXPECT_EQ(expected, floor(x));
 }
 
 TEST(MathTest, FloorNegativeZeroInt)
 {
+    using Emblate::floor;
+
     int x = -0;
     int expected = -0;
 
-    EXPECT_EQ(expected, Emblate::floor(x));
+    EXPECT_EQ(expected, floor(x));
 }
 
 TEST(MathTest, FloorReturnTypeFloat)
 {
+    using Emblate::floor;
+
     float x = 0;
 
-    EXPECT_EQ(typeid(float), typeid(Emblate::floor(x)));
+    EXPECT_EQ(typeid(float), typeid(floor(x)));
 }
 
 TEST(MathTest, FloorPositiveFloat)
 {
-    float x = 1.9;
-    float expected = 1.0;
+    using Emblate::floor;
 
-    EXPECT_EQ(expected, Emblate::floor(x));
+    float x = 1.9f;
+    float expected = 1.0f;
+
+    EXPECT_FLOAT_EQ(expected, floor(x));
 }
 
 TEST(MathTest, FloorNegativeFloat)
 {
-    float x = -0.1;
-    float expected = -1.0;
+    using Emblate::floor;
 
-    EXPECT_EQ(expected, Emblate::floor(x));
+    float x = -0.1f;
+    float expected = -1.0f;
+
+    EXPECT_FLOAT_EQ(expected, floor(x));
 }
 
 TEST(MathTest, FloorPositiveZeroFloat)
 {
-    float x = 0.0;
-    float expected = 0.0;
+    using Emblate::floor;
 
-    EXPECT_EQ(expected, Emblate::floor(x));
+    float x = 0.0f;
+    float expected = 0.0f;
+
+    EXPECT_FLOAT_EQ(expected, floor(x));
 }
 
 TEST(MathTest, FloorNegativeZeroFloat)
 {
-    float x = -0.0;
-    float expected = -0.0;
+    using Emblate::floor;
 
-    EXPECT_EQ(expected, Emblate::floor(x));
+    float x = -0.0f;
+    float expected = -0.0f;
+
+    EXPECT_FLOAT_EQ(expected, floor(x));
 }
 
 TEST(MathTest, CeilReturnTypeInt)
 {
+    using Emblate::ceil;
+
     int x = 0;
 
-    EXPECT_EQ(typeid(int), typeid(Emblate::ceil(x)));
+    EXPECT_EQ(typeid(int), typeid(ceil(x)));
 }
 
 TEST(MathTest, CeilPositiveInt)
 {
+    using Emblate::ceil;
+
     int x = 1;
     int expected = 1;
 
-    EXPECT_EQ(expected, Emblate::ceil(x));
+    EXPECT_EQ(expected, ceil(x));
 }
 
 TEST(MathTest, CeilNegativeInt)
 {
+    using Emblate::ceil;
+
     int x = -1;
     int expected = -1;
 
-    EXPECT_EQ(expected, Emblate::ceil(x));
+    EXPECT_EQ(expected, ceil(x));
 }
 
 TEST(MathTest, CeilPositiveZeroInt)
 {
+    using Emblate::ceil;
+
     int x = 0;
     int expected = 0;
 
-    EXPECT_EQ(expected, Emblate::ceil(x));
+    EXPECT_EQ(expected, ceil(x));
 }
 
 TEST(MathTest, CeilNegativeZeroInt)
 {
+    using Emblate::ceil;
+
     int x = -0;
     int expected = -0;
 
-    EXPECT_EQ(expected, Emblate::ceil(x));
+    EXPECT_EQ(expected, ceil(x));
 }
 
 TEST(MathTest, CeilReturnTypeFloat)
 {
+    using Emblate::ceil;
+
     float x = 0;
 
-    EXPECT_EQ(typeid(float), typeid(Emblate::ceil(x)));
+    EXPECT_EQ(typeid(float), typeid(ceil(x)));
 }
 
 TEST(MathTest, CeilPositiveFloat)
 {
-    float x = 0.1;
-    float expected = 1.0;
+    using Emblate::ceil;
 
-    EXPECT_EQ(expected, Emblate::ceil(x));
+    float x = 0.1f;
+    float expected = 1.0f;
+
+    EXPECT_FLOAT_EQ(expected, ceil(x));
 }
 
 TEST(MathTest, CeilNegativeFloat)
 {
-    float x = -1.9;
-    float expected = -1.0;
+    using Emblate::ceil;
 
-    EXPECT_EQ(expected, Emblate::ceil(x));
+    float x = -1.9f;
+    float expected = -1.0f;
+
+    EXPECT_FLOAT_EQ(expected, ceil(x));
 }
 
 TEST(MathTest, CeilPositiveZeroFloat)
 {
-    float x = 0.0;
-    float expected = 0.0;
+    using Emblate::ceil;
 
-    EXPECT_EQ(expected, Emblate::ceil(x));
+    float x = 0.0f;
+    float expected = 0.0f;
+
+    EXPECT_FLOAT_EQ(expected, ceil(x));
 }
 
 TEST(MathTest, CeilNegativeZeroFloat)
 {
-    float x = -0.0;
-    float expected = -0.0;
+    using Emblate::ceil;
 
-    EXPECT_EQ(expected, Emblate::ceil(x));
+    float x = -0.0f;
+    float expected = -0.0f;
+
+    EXPECT_FLOAT_EQ(expected, ceil(x));
 }
 
 TEST(MathTest, MapReturnTypeInt)
 {
-    EXPECT_EQ(typeid(int), typeid(Emblate::map<int>(5, 0, 10, 0, 100)));
+    using Emblate::map;
+
+    EXPECT_EQ(typeid(int), typeid(map<int>(5, 0, 10, 0, 100)));
 }
 
 TEST(MathTest, MapValuesInt)
 {
-    EXPECT_EQ(50, Emblate::map<int>(5, 0, 10, 0, 100));
+    using Emblate::map;
 
-    EXPECT_EQ(50, Emblate::map<int>(0, -10, 10, 0, 100));
+    EXPECT_EQ(50, map<int>(5, 0, 10, 0, 100));
 
-    EXPECT_EQ(25, Emblate::map<int>(-5, -10, 10, 0, 100));
+    EXPECT_EQ(50, map<int>(0, -10, 10, 0, 100));
+
+    EXPECT_EQ(25, map<int>(-5, -10, 10, 0, 100));
 }
 
 TEST(MathTest, MapReturnTypeFloat)
 {
-    EXPECT_EQ(typeid(float), typeid(Emblate::map<float>(5.0, 0.0, 10.0, 0.0, 100.0)));
+    using Emblate::map;
+
+    EXPECT_EQ(typeid(float),
+              typeid(map<float>(5.0f, 0.0f, 10.0f, 0.0f, 100.0f)));
 }
 
 TEST(MathTest, MapValuesFloat)
 {
-    EXPECT_EQ(50, Emblate::map<float>(5.0, 0.0, 10.0, 0.0, 100.0));
+    using Emblate::map;
 
-    EXPECT_EQ(50, Emblate::map<float>(0.0, -10.0, 10.0, 0.0, 100.0));
+    EXPECT_FLOAT_EQ(50, map<float>(5.0f, 0.0f, 10.0f, 0.0f, 100.0f));
 
-    EXPECT_EQ(25, Emblate::map<float>(-5.0, -10.0, 10.0, 0.0, 100.0));
+    EXPECT_FLOAT_EQ(50, map<float>(0.0f, -10.0f, 10.0f, 0.0f, 100.0f));
+
+    EXPECT_FLOAT_EQ(25, map<float>(-5.0f, -10.0f, 10.0f, 0.0f, 100.0f));
 }

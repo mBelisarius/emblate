@@ -1,25 +1,24 @@
+#include "src/Internal/Algorithms/Sort.h"
 #include "src/Data"
-#include "src/Algorithms"
 #include <gtest/gtest.h>
+
+// TODO: Test cases for float type
+// TODO: Test cases for different containers
+// TODO: Test cases for custom data types
 
 TEST(HeapSortTest, SortPositives)
 {
-    Emblate::Vector<int> unsorted;
-    unsorted.push_back(5);
-    unsorted.push_back(4);
-    unsorted.push_back(3);
-    unsorted.push_back(2);
-    unsorted.push_back(1);
+    using Emblate::Vector;
+    using Emblate::HeapSort;
 
-    Emblate::HeapSort<int> sorter(unsorted);
+    int unsorted_array[] = { 5, 4, 3, 2, 1 };
+    Vector<int> unsorted(unsorted_array, 5);
+
+    HeapSort<int> sorter(unsorted);
     sorter.sort();
 
-    Emblate::Vector<int> sorted;
-    sorted.push_back(1);
-    sorted.push_back(2);
-    sorted.push_back(3);
-    sorted.push_back(4);
-    sorted.push_back(5);
+    int sorted_array[] = { 1, 2, 3, 4, 5 };
+    Vector<int> sorted(sorted_array, 5);
 
     for (int i = 0; i < unsorted.size(); i++)
     {
@@ -29,22 +28,17 @@ TEST(HeapSortTest, SortPositives)
 
 TEST(HeapSortTest, SortNegatives)
 {
-    Emblate::Vector<int> unsorted;
-    unsorted.push_back(-1);
-    unsorted.push_back(-2);
-    unsorted.push_back(-3);
-    unsorted.push_back(-4);
-    unsorted.push_back(-5);
+    using Emblate::Vector;
+    using Emblate::HeapSort;
 
-    Emblate::HeapSort<int> sorter(unsorted);
+    int unsorted_array[] = { -1, -2, -3, -4, -5 };
+    Vector<int> unsorted(unsorted_array, 5);
+
+    HeapSort<int> sorter(unsorted);
     sorter.sort();
 
-    Emblate::Vector<int> sorted;
-    sorted.push_back(-5);
-    sorted.push_back(-4);
-    sorted.push_back(-3);
-    sorted.push_back(-2);
-    sorted.push_back(-1);
+    int sorted_array[] = { -5, -4, -3, -2, -1 };
+    Vector<int> sorted(sorted_array, 5);
 
     for (int i = 0; i < unsorted.size(); i++)
     {
@@ -54,22 +48,17 @@ TEST(HeapSortTest, SortNegatives)
 
 TEST(HeapSortTest, SortSigned)
 {
-    Emblate::Vector<int> unsorted;
-    unsorted.push_back(12);
-    unsorted.push_back(-23);
-    unsorted.push_back(20);
-    unsorted.push_back(0);
-    unsorted.push_back(-12);
+    using Emblate::Vector;
+    using Emblate::HeapSort;
 
-    Emblate::HeapSort<int> sorter(unsorted);
+    int unsorted_array[] = { 12, -23, 20, 0, -12 };
+    Vector<int> unsorted(unsorted_array, 5);
+
+    HeapSort<int> sorter(unsorted);
     sorter.sort();
 
-    Emblate::Vector<int> sorted;
-    sorted.push_back(-23);
-    sorted.push_back(-12);
-    sorted.push_back(0);
-    sorted.push_back(12);
-    sorted.push_back(20);
+    int sorted_array[] = { -23, -12, 0, 12, 20 };
+    Vector<int> sorted(sorted_array, 5);
 
     for (int i = 0; i < unsorted.size(); i++)
     {
@@ -79,22 +68,17 @@ TEST(HeapSortTest, SortSigned)
 
 TEST(HeapSortTest, SortZeroStart)
 {
-    Emblate::Vector<int> unsorted;
-    unsorted.push_back(0);
-    unsorted.push_back(4);
-    unsorted.push_back(3);
-    unsorted.push_back(2);
-    unsorted.push_back(1);
+    using Emblate::Vector;
+    using Emblate::HeapSort;
 
-    Emblate::HeapSort<int> sorter(unsorted);
+    int unsorted_array[] = { 0, 4, 3, 2, 1 };
+    Vector<int> unsorted(unsorted_array, 5);
+
+    HeapSort<int> sorter(unsorted);
     sorter.sort();
 
-    Emblate::Vector<int> sorted;
-    sorted.push_back(0);
-    sorted.push_back(1);
-    sorted.push_back(2);
-    sorted.push_back(3);
-    sorted.push_back(4);
+    int sorted_array[] = { 0, 1, 2, 3, 4 };
+    Vector<int> sorted(sorted_array, 5);
 
     for (int i = 0; i < unsorted.size(); i++)
     {
@@ -104,22 +88,17 @@ TEST(HeapSortTest, SortZeroStart)
 
 TEST(HeapSortTest, SortZeroEnd)
 {
-    Emblate::Vector<int> unsorted;
-    unsorted.push_back(4);
-    unsorted.push_back(3);
-    unsorted.push_back(2);
-    unsorted.push_back(1);
-    unsorted.push_back(0);
+    using Emblate::Vector;
+    using Emblate::HeapSort;
 
-    Emblate::HeapSort<int> sorter(unsorted);
+    int unsorted_array[] = { 4, 3, 2, 1, 0 };
+    Vector<int> unsorted(unsorted_array, 5);
+
+    HeapSort<int> sorter(unsorted);
     sorter.sort();
 
-    Emblate::Vector<int> sorted;
-    sorted.push_back(0);
-    sorted.push_back(1);
-    sorted.push_back(2);
-    sorted.push_back(3);
-    sorted.push_back(4);
+    int sorted_array[] = { 0, 1, 2, 3, 4 };
+    Vector<int> sorted(sorted_array, 5);
 
     for (int i = 0; i < unsorted.size(); i++)
     {
@@ -129,22 +108,17 @@ TEST(HeapSortTest, SortZeroEnd)
 
 TEST(HeapSortTest, SortZeroAll)
 {
-    Emblate::Vector<int> unsorted;
-    unsorted.push_back(0);
-    unsorted.push_back(0);
-    unsorted.push_back(0);
-    unsorted.push_back(0);
-    unsorted.push_back(0);
+    using Emblate::Vector;
+    using Emblate::HeapSort;
 
-    Emblate::HeapSort<int> sorter(unsorted);
+    int unsorted_array[] = { 0, 0, 0, 0, 0 };
+    Vector<int> unsorted(unsorted_array, 5);
+
+    HeapSort<int> sorter(unsorted);
     sorter.sort();
 
-    Emblate::Vector<int> sorted;
-    sorted.push_back(0);
-    sorted.push_back(0);
-    sorted.push_back(0);
-    sorted.push_back(0);
-    sorted.push_back(0);
+    int sorted_array[] = { 0, 0, 0, 0, 0 };
+    Vector<int> sorted(sorted_array, 5);
 
     for (int i = 0; i < unsorted.size(); i++)
     {

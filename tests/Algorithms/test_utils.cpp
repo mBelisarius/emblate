@@ -3,10 +3,12 @@
 
 TEST(UtilsTest, SwapValuesInt)
 {
+    using Emblate::swap;
+
     int a = 0;
     int b = 5;
 
-    Emblate::swap(a, b);
+    swap(a, b);
 
     EXPECT_EQ(a, 5);
     EXPECT_EQ(b, 0);
@@ -14,10 +16,12 @@ TEST(UtilsTest, SwapValuesInt)
 
 TEST(UtilsTest, SwapValuesFloat)
 {
+    using Emblate::swap;
+
     float x = 0.0f;
     float y = 5.0f;
 
-    Emblate::swap(x, y);
+    swap(x, y);
 
     EXPECT_FLOAT_EQ(x, 5.0f);
     EXPECT_FLOAT_EQ(y, 0.0f);
@@ -25,40 +29,48 @@ TEST(UtilsTest, SwapValuesFloat)
 
 TEST(UtilsTest, StrCmpEqualStrings)
 {
+    using Emblate::strCmp;
+
     const char* str1 = "hello";
     const char* str2 = "hello";
 
-    bool result = Emblate::strCmp(str1, str2);
+    bool result = strCmp(str1, str2);
 
-    ASSERT_TRUE(result);
+    EXPECT_TRUE(result);
 }
 
 TEST(UtilsTest, StrCmpDifferentStrings)
 {
+    using Emblate::strCmp;
+
     const char* str1 = "hello";
     const char* str2 = "world";
 
-    bool result = Emblate::strCmp(str1, str2);
+    bool result = strCmp(str1, str2);
 
-    ASSERT_FALSE(result);
+    EXPECT_FALSE(result);
 }
 
 TEST(UtilsTest, StrCmpEmptyStrings)
 {
+    using Emblate::strCmp;
+
     const char* str1 = "";
     const char* str2 = "";
 
-    bool result = Emblate::strCmp(str1, str2);
+    bool result = strCmp(str1, str2);
 
-    ASSERT_TRUE(result);
+    EXPECT_TRUE(result);
 }
 
 TEST(UtilsTest, StrCmpOneEmptyString)
 {
+    using Emblate::strCmp;
+
     const char* str1 = "hello";
     const char* str2 = "";
 
-    bool result = Emblate::strCmp(str1, str2);
+    bool result = strCmp(str1, str2);
 
-    ASSERT_FALSE(result);
+    EXPECT_FALSE(result);
 }

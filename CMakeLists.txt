@@ -51,6 +51,7 @@ add_executable("${ProjectName}-test"
         tests/Algorithms/test_utils.cpp
         tests/Data/test_list.cpp
         tests/Data/test_queue.cpp
+        tests/Data/test_stack.cpp
         tests/Data/test_vector.cpp
 )
 

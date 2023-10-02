@@ -2,6 +2,10 @@
 #include "src/Data"
 #include <gtest/gtest.h>
 
+using Emblate::Vector;
+using Emblate::Interp1d;
+using Emblate::out_of_range;
+
 TEST(InterpolateTest, ConstructorSorted)
 {
     using Emblate::Vector;
@@ -18,9 +22,6 @@ TEST(InterpolateTest, ConstructorSorted)
 
 TEST(InterpolateTest, ConstructorUnsorted)
 {
-    using Emblate::Vector;
-    using Emblate::Interp1d;
-
     double xp_array[] = { 4.0, 2.0, 3.0, 1.0 };
     Vector<double> xp(xp_array, 4);
 
@@ -32,9 +33,6 @@ TEST(InterpolateTest, ConstructorUnsorted)
 
 TEST(InterpolateTest, LinearInterpolation)
 {
-    using Emblate::Vector;
-    using Emblate::Interp1d;
-
     double xp_array[] = { 1.0, 2.0, 3.0, 4.0 };
     Vector<double> xp(xp_array, 4);
 
@@ -50,10 +48,6 @@ TEST(InterpolateTest, LinearInterpolation)
 
 TEST(InterpolateTest, OutOfBoundsInterpolation)
 {
-    using Emblate::Vector;
-    using Emblate::Interp1d;
-    using Emblate::out_of_range;
-
     double xp_array[] = { 1.0, 2.0, 3.0, 4.0 };
     Vector<double> xp(xp_array, 4);
 

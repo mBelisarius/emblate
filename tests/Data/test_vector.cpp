@@ -1,10 +1,11 @@
 #include "src/Internal/Data/Vector.h"
 #include <gtest/gtest.h>
 
+using Emblate::Vector;
+using Emblate::out_of_range;
+
 TEST(VectorTest, DefaultConstructor)
 {
-    using Emblate::Vector;
-
     Vector<int> vector;
 
     EXPECT_EQ(vector.size(), 0);
@@ -14,14 +15,11 @@ TEST(VectorTest, DefaultConstructor)
 
 TEST(VectorTest, SizeInitializedConstructor)
 {
-    using Emblate::Vector;
-
     Vector<int> vector(5);
 
     EXPECT_EQ(vector.size(), 5);
     EXPECT_EQ(vector.capacity(), 5);
     EXPECT_FALSE(vector.empty());
-
     for (size_t i = 0; i < 5; i++)
     {
         EXPECT_EQ(vector.at(i), int());
@@ -30,14 +28,11 @@ TEST(VectorTest, SizeInitializedConstructor)
 
 TEST(VectorTest, ValueInitializedConstructor)
 {
-    using Emblate::Vector;
-
     Vector<int> vector(5, 1);
 
     EXPECT_EQ(vector.size(), 5);
     EXPECT_EQ(vector.capacity(), 5);
     EXPECT_FALSE(vector.empty());
-
     for (size_t i = 0; i < 5; i++)
     {
         EXPECT_EQ(vector.at(i), 1);
@@ -46,15 +41,12 @@ TEST(VectorTest, ValueInitializedConstructor)
 
 TEST(VectorTest, ArrayInitializedConstructor)
 {
-    using Emblate::Vector;
-
     int arr[5] = { 1, 2, 3, 4, 5 };
     Vector<int> vector(arr, 5);
 
     EXPECT_EQ(vector.size(), 5);
     EXPECT_EQ(vector.capacity(), 5);
     EXPECT_FALSE(vector.empty());
-
     for (size_t i = 0; i < 5; i++)
     {
         EXPECT_EQ(vector.at(i), arr[i]);
@@ -63,26 +55,34 @@ TEST(VectorTest, ArrayInitializedConstructor)
 
 TEST(VectorTest, CopyConstructor)
 {
-    using Emblate::Vector;
-
     Vector<int> vector1(5, 1);
     Vector<int> vector2(vector1);
 
     EXPECT_EQ(vector2.size(), 5);
     EXPECT_EQ(vector2.capacity(), 5);
     EXPECT_FALSE(vector2.empty());
-
     for (size_t i = 0; i < 5; i++)
     {
-        EXPECT_EQ(vector2.at(i), 1);
+        EXPECT_EQ(vector2.at(i), vector1.at(i));
+    }
+}
+
+TEST(VectorTest, AssignmentOperator)
+{
+    Vector<int> vector1(5, 1);
+    Vector<int> vector2 = vector1;
+
+    EXPECT_EQ(vector2.size(), 5);
+    EXPECT_EQ(vector2.capacity(), 5);
+    EXPECT_FALSE(vector2.empty());
+    for (size_t i = 0; i < 5; i++)
+    {
+        EXPECT_EQ(vector2.at(i), vector1.at(i));
     }
 }
 
 TEST(VectorTest, At)
 {
-    using Emblate::Vector;
-    using Emblate::out_of_range;
-
     Vector<int> vector;
     vector.push_back(1);
     vector.push_back(2);
@@ -92,10 +92,8 @@ TEST(VectorTest, At)
     EXPECT_THROW(vector.at(2), out_of_range);
 }
 
-TEST(VectorTest, AtOperator)
+TEST(VectorTest, Indexing)
 {
-    using Emblate::Vector;
-
     Vector<int> vector;
     vector.push_back(1);
     vector.push_back(2);
@@ -107,8 +105,6 @@ TEST(VectorTest, AtOperator)
 
 TEST(VectorTest, Front)
 {
-    using Emblate::Vector;
-
     Vector<int> vector;
     vector.push_back(1);
     vector.push_back(2);
@@ -118,8 +114,6 @@ TEST(VectorTest, Front)
 
 TEST(VectorTest, Back)
 {
-    using Emblate::Vector;
-
     Vector<int> vector;
     vector.push_back(1);
     vector.push_back(2);
@@ -129,8 +123,6 @@ TEST(VectorTest, Back)
 
 TEST(VectorTest, Data)
 {
-    using Emblate::Vector;
-
     Vector<int> vector;
     vector.push_back(1);
     vector.push_back(2);
@@ -141,8 +133,6 @@ TEST(VectorTest, Data)
 
 TEST(VectorTest, Clear)
 {
-    using Emblate::Vector;
-
     Vector<int> vector(5, 1);
     vector.clear();
 
@@ -150,38 +140,25 @@ TEST(VectorTest, Clear)
     EXPECT_TRUE(vector.empty());
 }
 
-TEST(VectorTest, PushBack)
+TEST(ListTest, PushBackPopBack)
 {
-    using Emblate::Vector;
-
     Vector<int> vector;
-    vector.push_back(1);
-    vector.push_back(2);
 
-    EXPECT_EQ(vector.size(), 2);
-    EXPECT_EQ(vector.front(), 1);
-    EXPECT_EQ(vector.back(), 2);
-}
+    for (int i = 0; i < 5; i++)
+    {
+        vector.push_back(i);
+    }
 
-TEST(VectorTest, PopBack)
-{
-    using Emblate::Vector;
-
-    Vector<int> vector;
-    vector.push_back(1);
-    vector.push_back(2);
-
-    int last = vector.pop_back();
-
-    EXPECT_EQ(last, 2);
-    EXPECT_EQ(vector.size(), 1);
-    EXPECT_EQ(vector.back(), 1);
+    EXPECT_EQ(vector.size(), 5);
+    for (int i = 0; i < 5; i++)
+    {
+        EXPECT_EQ(vector.back(), 5 - i - 1);
+        vector.pop_back();
+    }
 }
 
 TEST(VectorTest, Swap)
 {
-    using Emblate::Vector;
-
     Vector<int> vector;
     vector.push_back(1);
     vector.push_back(2);

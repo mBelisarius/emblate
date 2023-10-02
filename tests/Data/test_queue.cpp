@@ -1,5 +1,5 @@
-#include "gtest/gtest.h"
 #include "src/Internal/Data/Queue.h"
+#include <gtest/gtest.h>
 
 using Emblate::Queue;
 

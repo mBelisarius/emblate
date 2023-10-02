@@ -2,15 +2,15 @@
 #include "src/Data"
 #include <gtest/gtest.h>
 
+using Emblate::Vector;
+using Emblate::HeapSort;
+
 // TODO: Test cases for float type
 // TODO: Test cases for different containers
 // TODO: Test cases for custom data types
 
 TEST(HeapSortTest, SortPositives)
 {
-    using Emblate::Vector;
-    using Emblate::HeapSort;
-
     int unsorted_array[] = { 5, 4, 3, 2, 1 };
     Vector<int> unsorted(unsorted_array, 5);
 
@@ -28,9 +28,6 @@ TEST(HeapSortTest, SortPositives)
 
 TEST(HeapSortTest, SortNegatives)
 {
-    using Emblate::Vector;
-    using Emblate::HeapSort;
-
     int unsorted_array[] = { -1, -2, -3, -4, -5 };
     Vector<int> unsorted(unsorted_array, 5);
 
@@ -48,9 +45,6 @@ TEST(HeapSortTest, SortNegatives)
 
 TEST(HeapSortTest, SortSigned)
 {
-    using Emblate::Vector;
-    using Emblate::HeapSort;
-
     int unsorted_array[] = { 12, -23, 20, 0, -12 };
     Vector<int> unsorted(unsorted_array, 5);
 
@@ -68,9 +62,6 @@ TEST(HeapSortTest, SortSigned)
 
 TEST(HeapSortTest, SortZeroStart)
 {
-    using Emblate::Vector;
-    using Emblate::HeapSort;
-
     int unsorted_array[] = { 0, 4, 3, 2, 1 };
     Vector<int> unsorted(unsorted_array, 5);
 
@@ -88,9 +79,6 @@ TEST(HeapSortTest, SortZeroStart)
 
 TEST(HeapSortTest, SortZeroEnd)
 {
-    using Emblate::Vector;
-    using Emblate::HeapSort;
-
     int unsorted_array[] = { 4, 3, 2, 1, 0 };
     Vector<int> unsorted(unsorted_array, 5);
 
@@ -108,9 +96,6 @@ TEST(HeapSortTest, SortZeroEnd)
 
 TEST(HeapSortTest, SortZeroAll)
 {
-    using Emblate::Vector;
-    using Emblate::HeapSort;
-
     int unsorted_array[] = { 0, 0, 0, 0, 0 };
     Vector<int> unsorted(unsorted_array, 5);
 
@@ -128,13 +113,13 @@ TEST(HeapSortTest, SortZeroAll)
 
 TEST(HeapSortTest, SortOneElement)
 {
-    Emblate::Vector<int> unsorted;
+    Vector<int> unsorted;
     unsorted.push_back(1);
 
-    Emblate::HeapSort<int> sorter(unsorted);
+    HeapSort<int> sorter(unsorted);
     sorter.sort();
 
-    Emblate::Vector<int> sorted;
+    Vector<int> sorted;
     sorted.push_back(1);
 
     for (int i = 0; i < unsorted.size(); i++)

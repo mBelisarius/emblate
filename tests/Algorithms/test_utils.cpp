@@ -1,10 +1,11 @@
 #include "src/Internal/Algorithms/Utils.h"
 #include <gtest/gtest.h>
 
+using Emblate::swap;
+using Emblate::strCmp;
+
 TEST(UtilsTest, SwapValuesInt)
 {
-    using Emblate::swap;
-
     int a = 0;
     int b = 5;
 
@@ -16,8 +17,6 @@ TEST(UtilsTest, SwapValuesInt)
 
 TEST(UtilsTest, SwapValuesFloat)
 {
-    using Emblate::swap;
-
     float x = 0.0f;
     float y = 5.0f;
 
@@ -29,8 +28,6 @@ TEST(UtilsTest, SwapValuesFloat)
 
 TEST(UtilsTest, StrCmpEqualStrings)
 {
-    using Emblate::strCmp;
-
     const char* str1 = "hello";
     const char* str2 = "hello";
 
@@ -41,8 +38,6 @@ TEST(UtilsTest, StrCmpEqualStrings)
 
 TEST(UtilsTest, StrCmpDifferentStrings)
 {
-    using Emblate::strCmp;
-
     const char* str1 = "hello";
     const char* str2 = "world";
 
@@ -53,8 +48,6 @@ TEST(UtilsTest, StrCmpDifferentStrings)
 
 TEST(UtilsTest, StrCmpEmptyStrings)
 {
-    using Emblate::strCmp;
-
     const char* str1 = "";
     const char* str2 = "";
 
@@ -65,8 +58,6 @@ TEST(UtilsTest, StrCmpEmptyStrings)
 
 TEST(UtilsTest, StrCmpOneEmptyString)
 {
-    using Emblate::strCmp;
-
     const char* str1 = "hello";
     const char* str2 = "";
 

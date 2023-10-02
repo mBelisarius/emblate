@@ -1,10 +1,13 @@
 #include "src/Internal/Algorithms/Math.h"
 #include <gtest/gtest.h>
 
+using Emblate::abs;
+using Emblate::floor;
+using Emblate::ceil;
+using Emblate::map;
+
 TEST(MathTest, AbsReturnTypeInt)
 {
-    using Emblate::abs;
-
     int x = 0;
 
     EXPECT_EQ(typeid(int), typeid(abs(x)));
@@ -12,8 +15,6 @@ TEST(MathTest, AbsReturnTypeInt)
 
 TEST(MathTest, AbsPositiveInt)
 {
-    using Emblate::abs;
-
     int x = 1;
     int expected = 1;
 
@@ -22,8 +23,6 @@ TEST(MathTest, AbsPositiveInt)
 
 TEST(MathTest, AbsNegativeInt)
 {
-    using Emblate::abs;
-
     int x = -1;
     int expected = 1;
 
@@ -32,8 +31,6 @@ TEST(MathTest, AbsNegativeInt)
 
 TEST(MathTest, AbsPositiveZeroInt)
 {
-    using Emblate::abs;
-
     int x = 0;
     int expected = 0;
 
@@ -42,8 +39,6 @@ TEST(MathTest, AbsPositiveZeroInt)
 
 TEST(MathTest, AbsNegativeZeroInt)
 {
-    using Emblate::abs;
-
     int x = -0;
     int expected = 0;
 
@@ -52,8 +47,6 @@ TEST(MathTest, AbsNegativeZeroInt)
 
 TEST(MathTest, AbsReturnTypeFloat)
 {
-    using Emblate::abs;
-
     float x = 0.0f;
 
     EXPECT_EQ(typeid(float), typeid(abs(x)));
@@ -61,8 +54,6 @@ TEST(MathTest, AbsReturnTypeFloat)
 
 TEST(MathTest, AbsPositiveFloat)
 {
-    using Emblate::abs;
-
     float x = 1.0f;
     float expected = 1.0f;
 
@@ -71,8 +62,6 @@ TEST(MathTest, AbsPositiveFloat)
 
 TEST(MathTest, AbsNegativeFloat)
 {
-    using Emblate::abs;
-
     float x = -1.0f;
     float expected = 1.0f;
 
@@ -81,8 +70,6 @@ TEST(MathTest, AbsNegativeFloat)
 
 TEST(MathTest, AbsPositiveZeroFloat)
 {
-    using Emblate::abs;
-
     float x = 0.0f;
     float expected = 0.0f;
 
@@ -91,8 +78,6 @@ TEST(MathTest, AbsPositiveZeroFloat)
 
 TEST(MathTest, AbsNegativeZeroFloat)
 {
-    using Emblate::abs;
-
     float x = -0.0f;
     float expected = 0.0f;
 
@@ -101,8 +86,6 @@ TEST(MathTest, AbsNegativeZeroFloat)
 
 TEST(MathTest, FloorReturnTypeInt)
 {
-    using Emblate::floor;
-
     int x = 0;
 
     EXPECT_EQ(typeid(int), typeid(floor(x)));
@@ -110,8 +93,6 @@ TEST(MathTest, FloorReturnTypeInt)
 
 TEST(MathTest, FloorPositiveInt)
 {
-    using Emblate::floor;
-
     int x = 1;
     int expected = 1;
 
@@ -120,8 +101,6 @@ TEST(MathTest, FloorPositiveInt)
 
 TEST(MathTest, FloorNegativeInt)
 {
-    using Emblate::floor;
-
     int x = -1;
     int expected = -1;
 
@@ -130,8 +109,6 @@ TEST(MathTest, FloorNegativeInt)
 
 TEST(MathTest, FloorPositiveZeroInt)
 {
-    using Emblate::floor;
-
     int x = 0;
     int expected = 0;
 
@@ -140,8 +117,6 @@ TEST(MathTest, FloorPositiveZeroInt)
 
 TEST(MathTest, FloorNegativeZeroInt)
 {
-    using Emblate::floor;
-
     int x = -0;
     int expected = -0;
 
@@ -150,8 +125,6 @@ TEST(MathTest, FloorNegativeZeroInt)
 
 TEST(MathTest, FloorReturnTypeFloat)
 {
-    using Emblate::floor;
-
     float x = 0;
 
     EXPECT_EQ(typeid(float), typeid(floor(x)));
@@ -159,8 +132,6 @@ TEST(MathTest, FloorReturnTypeFloat)
 
 TEST(MathTest, FloorPositiveFloat)
 {
-    using Emblate::floor;
-
     float x = 1.9f;
     float expected = 1.0f;
 
@@ -169,8 +140,6 @@ TEST(MathTest, FloorPositiveFloat)
 
 TEST(MathTest, FloorNegativeFloat)
 {
-    using Emblate::floor;
-
     float x = -0.1f;
     float expected = -1.0f;
 
@@ -179,8 +148,6 @@ TEST(MathTest, FloorNegativeFloat)
 
 TEST(MathTest, FloorPositiveZeroFloat)
 {
-    using Emblate::floor;
-
     float x = 0.0f;
     float expected = 0.0f;
 
@@ -189,8 +156,6 @@ TEST(MathTest, FloorPositiveZeroFloat)
 
 TEST(MathTest, FloorNegativeZeroFloat)
 {
-    using Emblate::floor;
-
     float x = -0.0f;
     float expected = -0.0f;
 
@@ -199,8 +164,6 @@ TEST(MathTest, FloorNegativeZeroFloat)
 
 TEST(MathTest, CeilReturnTypeInt)
 {
-    using Emblate::ceil;
-
     int x = 0;
 
     EXPECT_EQ(typeid(int), typeid(ceil(x)));
@@ -208,8 +171,6 @@ TEST(MathTest, CeilReturnTypeInt)
 
 TEST(MathTest, CeilPositiveInt)
 {
-    using Emblate::ceil;
-
     int x = 1;
     int expected = 1;
 
@@ -218,8 +179,6 @@ TEST(MathTest, CeilPositiveInt)
 
 TEST(MathTest, CeilNegativeInt)
 {
-    using Emblate::ceil;
-
     int x = -1;
     int expected = -1;
 
@@ -228,8 +187,6 @@ TEST(MathTest, CeilNegativeInt)
 
 TEST(MathTest, CeilPositiveZeroInt)
 {
-    using Emblate::ceil;
-
     int x = 0;
     int expected = 0;
 
@@ -238,8 +195,6 @@ TEST(MathTest, CeilPositiveZeroInt)
 
 TEST(MathTest, CeilNegativeZeroInt)
 {
-    using Emblate::ceil;
-
     int x = -0;
     int expected = -0;
 
@@ -248,8 +203,6 @@ TEST(MathTest, CeilNegativeZeroInt)
 
 TEST(MathTest, CeilReturnTypeFloat)
 {
-    using Emblate::ceil;
-
     float x = 0;
 
     EXPECT_EQ(typeid(float), typeid(ceil(x)));
@@ -257,8 +210,6 @@ TEST(MathTest, CeilReturnTypeFloat)
 
 TEST(MathTest, CeilPositiveFloat)
 {
-    using Emblate::ceil;
-
     float x = 0.1f;
     float expected = 1.0f;
 
@@ -267,8 +218,6 @@ TEST(MathTest, CeilPositiveFloat)
 
 TEST(MathTest, CeilNegativeFloat)
 {
-    using Emblate::ceil;
-
     float x = -1.9f;
     float expected = -1.0f;
 
@@ -277,8 +226,6 @@ TEST(MathTest, CeilNegativeFloat)
 
 TEST(MathTest, CeilPositiveZeroFloat)
 {
-    using Emblate::ceil;
-
     float x = 0.0f;
     float expected = 0.0f;
 
@@ -287,8 +234,6 @@ TEST(MathTest, CeilPositiveZeroFloat)
 
 TEST(MathTest, CeilNegativeZeroFloat)
 {
-    using Emblate::ceil;
-
     float x = -0.0f;
     float expected = -0.0f;
 
@@ -297,37 +242,25 @@ TEST(MathTest, CeilNegativeZeroFloat)
 
 TEST(MathTest, MapReturnTypeInt)
 {
-    using Emblate::map;
-
     EXPECT_EQ(typeid(int), typeid(map<int>(5, 0, 10, 0, 100)));
 }
 
 TEST(MathTest, MapValuesInt)
 {
-    using Emblate::map;
-
     EXPECT_EQ(50, map<int>(5, 0, 10, 0, 100));
-
     EXPECT_EQ(50, map<int>(0, -10, 10, 0, 100));
-
     EXPECT_EQ(25, map<int>(-5, -10, 10, 0, 100));
 }
 
 TEST(MathTest, MapReturnTypeFloat)
 {
-    using Emblate::map;
-
     EXPECT_EQ(typeid(float),
               typeid(map<float>(5.0f, 0.0f, 10.0f, 0.0f, 100.0f)));
 }
 
 TEST(MathTest, MapValuesFloat)
 {
-    using Emblate::map;
-
     EXPECT_FLOAT_EQ(50, map<float>(5.0f, 0.0f, 10.0f, 0.0f, 100.0f));
-
     EXPECT_FLOAT_EQ(50, map<float>(0.0f, -10.0f, 10.0f, 0.0f, 100.0f));
-
     EXPECT_FLOAT_EQ(25, map<float>(-5.0f, -10.0f, 10.0f, 0.0f, 100.0f));
 }

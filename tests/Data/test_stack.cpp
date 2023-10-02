@@ -6,6 +6,7 @@ using Emblate::Stack;
 TEST(StackTest, DefaultConstructor)
 {
     Stack<int> stack;
+
     EXPECT_TRUE(stack.empty());
     EXPECT_EQ(stack.size(), 0);
 }
@@ -13,6 +14,7 @@ TEST(StackTest, DefaultConstructor)
 TEST(StackTest, ValueConstructor)
 {
     Stack<int> stack(5, 2);
+
     EXPECT_FALSE(stack.empty());
     EXPECT_EQ(stack.size(), 5);
     for (size_t i = 0; i < 5; i++)
@@ -25,6 +27,7 @@ TEST(StackTest, ArrayConstructor)
 {
     int array[3] = { 1, 2, 3 };
     Stack<int> stack(array, 3);
+
     EXPECT_FALSE(stack.empty());
     EXPECT_EQ(stack.size(), 3);
     for (size_t i = 0; i < 3; i++)
@@ -37,6 +40,7 @@ TEST(StackTest, CopyConstructor)
 {
     Stack<int> stack1(5, 2);
     Stack<int> stack2(stack1);
+
     EXPECT_FALSE(stack2.empty());
     EXPECT_EQ(stack2.size(), 5);
     for (size_t i = 0; i < 5; i++)
@@ -72,10 +76,12 @@ TEST(StackTest, StackOperations)
     EXPECT_EQ(stack.size(), 3);
 
     stack.pop();
+
     EXPECT_EQ(stack.back(), 2);
     EXPECT_EQ(stack.size(), 2);
 
     stack.clear();
+
     EXPECT_TRUE(stack.empty());
     EXPECT_EQ(stack.size(), 0);
 }

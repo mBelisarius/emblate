@@ -1,5 +1,4 @@
 #include "./Internal/Data/List.h"
 #include "./Internal/Data/Queue.h"
 #include "./Internal/Data/Stack.h"
-#include "./Internal/Data/Tuple.h"
 #include "./Internal/Data/Vector.h"

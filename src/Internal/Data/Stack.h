@@ -14,7 +14,7 @@ namespace Emblate
      * @tparam T The type of the elements.
      */
     template<typename T>
-    class Stack : List<T>
+    class Stack
     {
     public:
         Stack();
@@ -27,7 +27,7 @@ namespace Emblate
 
         Stack<T>& operator=(const Stack<T>& other);
 
-        bool empty() const;
+        bool empty();
         size_t size();
 
         T& at(size_t i);
@@ -48,7 +48,7 @@ namespace Emblate
         void clear();
 
         void push(T value);
-        T pop();
+        void pop();
 
     private:
         List<T> m_data;
@@ -118,7 +118,7 @@ namespace Emblate
     template<typename T>
     Stack<T>::~Stack()
     {
-        delete m_data;
+        m_data.~List();
     }
 
     /**
@@ -135,8 +135,7 @@ namespace Emblate
         if (this == &other) return *this;
 
         // Copy assignment
-        delete m_data;
-        m_data = new List<T>(other.m_data);
+        m_data = other.m_data;
 
         return *this;
     }
@@ -148,9 +147,9 @@ namespace Emblate
      * @return True if the container is empty, false otherwise.
      */
     template<class T>
-    bool Stack<T>::empty() const
+    bool Stack<T>::empty()
     {
-        return size() == 0;
+        return m_data.empty();
     }
 
     /**
@@ -228,7 +227,7 @@ namespace Emblate
     template<class T>
     T& Stack<T>::front()
     {
-        return m_data[0];
+        return m_data.front();
     }
 
     /**
@@ -240,7 +239,7 @@ namespace Emblate
     template<class T>
     const T& Stack<T>::front() const
     {
-        return m_data[0];
+        return m_data.front();
     }
 
     /**
@@ -252,7 +251,7 @@ namespace Emblate
     template<class T>
     T& Stack<T>::back()
     {
-        return m_data[size() - 1];
+        return m_data.back();
     }
 
     /**
@@ -264,7 +263,7 @@ namespace Emblate
     template<class T>
     const T& Stack<T>::back() const
     {
-        return m_data[size() - 1];
+        return m_data.back();
     }
 
     /**
@@ -323,9 +322,9 @@ namespace Emblate
      * @tparam T The type of the elements.
      */
     template<typename T>
-    T Stack<T>::pop()
+    void Stack<T>::pop()
     {
-        return m_data.pop_back();
+        m_data.pop_back();
     }
 }
 

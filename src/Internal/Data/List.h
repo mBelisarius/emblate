@@ -178,8 +178,8 @@ namespace Emblate
         m_front_link->next = m_back_link;
         m_size = 0;
 
-        for (Node<T>* elem = other.m_front_link;
-             elem != 0;
+        for (auto* elem = other.m_front_link->next;
+             elem != other.m_back_link;
              elem = elem->next)
         {
             push_back(elem->value);
@@ -211,10 +211,10 @@ namespace Emblate
         if (this == &other) return *this;
 
         // Copy assignment
-        delete this;
+        clear();
 
-        for (Node<T>* elem = other.m_front_link;
-             elem != 0;
+        for (auto* elem = other.m_front_link->next;
+             elem != other.m_back_link;
              elem = elem->next)
         {
             push_back(elem->value);
@@ -460,7 +460,7 @@ namespace Emblate
     template<typename T>
     void List<T>::push_front(const T value)
     {
-        Node<T>* new_link = new Node<T>;
+        auto* new_link = new Node<T>;
         new_link->value = value;
         new_link->prev = m_front_link;
         new_link->next = m_front_link->next;

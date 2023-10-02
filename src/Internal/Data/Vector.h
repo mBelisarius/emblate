@@ -33,7 +33,7 @@ namespace Emblate
         void shrink_to_fit();
 
         bool empty() const;
-        size_t size();
+        size_t size() const;
         size_t capacity();
 
         T& at(size_t pos);
@@ -172,9 +172,7 @@ namespace Emblate
         // Memory reallocation
         if (other.m_size > m_capacity)
         {
-            delete m_data;
-            m_data = new T[other.m_size];
-            m_capacity = other.m_size;
+            reserve(other.m_size);
         }
 
         // Copy assignment
@@ -264,7 +262,7 @@ namespace Emblate
      * @return The number of elements.
      */
     template<typename T>
-    size_t Vector<T>::size()
+    size_t Vector<T>::size() const
     {
         return m_size;
     }
@@ -415,7 +413,7 @@ namespace Emblate
 
     /**
      * Erases all elements from the container. After this call, size()
-     * ns zero.
+     * returns zero.
      *
      * @tparam T The type of the elements.
      */
@@ -426,6 +424,8 @@ namespace Emblate
         {
             m_data[i] = T();
         }
+
+        m_size = 0;
     }
 
     /**
@@ -452,6 +452,9 @@ namespace Emblate
     template<typename T>
     T Vector<T>::pop_back()
     {
+        // TODO: Exception
+        if (m_size == 0) { throw; }
+
         m_size--;
         return m_data[m_size];
     }
@@ -466,9 +469,9 @@ namespace Emblate
     template<typename T>
     void Vector<T>::swap(size_t pos1, size_t pos2)
     {
-        m_data[pos1] += m_data[pos2];
-        m_data[pos2] = m_data[pos1] - m_data[pos2];
-        m_data[pos1] -= m_data[pos2];
+        T tmp = m_data[pos1];
+        m_data[pos1] = m_data[pos2];
+        m_data[pos2] = tmp;
     }
 }
 

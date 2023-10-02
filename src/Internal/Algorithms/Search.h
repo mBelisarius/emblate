@@ -2,6 +2,7 @@
 #define EMBLATE_SEARCH_H
 
 #include "./Math.h"
+#include "../Core/Exception.h"
 #include "../Data/Defines.h"
 #include "../Data/Vector.h"
 
@@ -22,22 +23,29 @@ namespace Emblate
     size_t binarySearch(const Vector<T>& arr, T val,
                         size_t lower_index, size_t upper_index)
     {
-        while (true)
+        if (lower_index > upper_index)
         {
-            if (abs<size_t>(upper_index - lower_index) <= 1)
-            {
-                return abs<T>(val - arr[upper_index]) > abs<T>(val - arr[lower_index])
-                       ? lower_index
-                       : upper_index;
-            }
+            throw out_of_range();
+        }
 
-            size_t mid_index = (lower_index + upper_index) / 2;
+        if (arr.size() == 0)
+        {
+            throw invalid_argument();
+        }
+
+        while (upper_index - lower_index > 1)
+        {
+            size_t mid_index = lower_index + (upper_index - lower_index) / 2;
             T mid = arr[mid_index];
 
-            if (val > mid) { lower_index = mid_index; }
-            if (val < mid) { upper_index = mid_index; }
             if (val == mid) { return mid_index; }
+            if (val > mid) { lower_index = mid_index; }
+            else { upper_index = mid_index; }
         }
+
+        return abs(val - arr[upper_index]) >= abs(val - arr[lower_index])
+               ? lower_index
+               : upper_index;
     }
 }
 

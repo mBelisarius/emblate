@@ -71,7 +71,7 @@ namespace Emblate
     template<typename T>
     T Interp1d<T>::linear(T x)
     {
-        if (x < m_x.front() || x > m_x.back()) { throw; }
+        if ((m_check_bounds) && (x < m_x.front() || x > m_x.back())) { throw out_of_range(); }
 
         size_t i = binarySearch<T>(m_x, x, 0, m_size - 1);
         if ((i == m_size - 1) || (i != 0 && x < m_x[i])) { i--; }

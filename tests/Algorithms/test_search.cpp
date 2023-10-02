@@ -4,7 +4,7 @@
 
 using Emblate::Vector;
 using Emblate::binarySearch;
-using Emblate::domain_error;
+using Emblate::invalid_argument;
 
 int sortedArrayInt[] = { -5, -4, -3, -2, -1, 0, 2, 3, 4, 5 };
 Emblate::Vector<int> sortedVectorInt(sortedArrayInt, 10);
@@ -68,7 +68,7 @@ TEST(SearchTest, BinarySearchEmptyArrayInt)
     Vector<int> emptyVector;
 
     EXPECT_THROW(binarySearch(emptyVector, 0, 0, emptyVector.size() - 1),
-                 domain_error);
+                 invalid_argument);
 }
 
 float sortedArrayFloat[] = { -5.5f, -4.4f, -3.3f, -2.2f, -1.1f, 0.0f, 2.2f,
@@ -134,5 +134,5 @@ TEST(SearchTest, BinarySearchEmptyArrayFloat)
     Vector<float> emptyVector;
 
     EXPECT_THROW(binarySearch(emptyVector, 0.0f, 0, emptyVector.size() - 1),
-                 domain_error);
+                 invalid_argument);
 }

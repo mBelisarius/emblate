@@ -27,7 +27,8 @@ namespace Emblate
      * @param str2 Second null-terminated byte string to compare.
      * @return True if both strings are equal. False otherwise.
      */
-    bool strCmp(const char* str1, const char* str2)
+    template<typename String = const char*>
+    bool strCmp(String str1, String str2)
     {
         while (*str1 && (*str1 == *str2))
         {
@@ -35,7 +36,7 @@ namespace Emblate
             str2++;
         }
 
-        return *(const unsigned char*)str1 == *(const unsigned char*)str2;
+        return *(String)str1 == *(String)str2;
     }
 }
 

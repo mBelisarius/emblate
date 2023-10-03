@@ -49,10 +49,10 @@ add_executable("${ProjectName}-test"
         tests/Algorithms/test_search.cpp
         tests/Algorithms/test_sort.cpp
         tests/Algorithms/test_utils.cpp
-        tests/Data/test_list.cpp
-        tests/Data/test_queue.cpp
-        tests/Data/test_stack.cpp
-        tests/Data/test_vector.cpp
+        tests/Container/test_list.cpp
+        tests/Container/test_queue.cpp
+        tests/Container/test_stack.cpp
+        tests/Container/test_vector.cpp
 )
 
 target_link_libraries("${ProjectName}-test" gtest_main "${ProjectName}")

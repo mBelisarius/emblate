@@ -4,8 +4,8 @@
 #include "./Search.h"
 #include "./Sort.h"
 #include "../Core/Exception.h"
-#include "../Data/Defines.h"
-#include "../Data/Vector.h"
+#include "../Container/Defines.h"
+#include "../Container/Vector.h"
 
 namespace Emblate
 {

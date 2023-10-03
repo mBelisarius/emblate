@@ -1,4 +1,4 @@
-#include "src/Internal/Data/Stack.h"
+#include "src/Internal/Container/Stack.h"
 #include "gtest/gtest.h"
 
 using Emblate::Stack;

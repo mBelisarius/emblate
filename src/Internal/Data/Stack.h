@@ -13,7 +13,7 @@ namespace Emblate
      *
      * @tparam T The type of the elements.
      */
-    template<typename T>
+    template<class T, class Container = List<T>>
     class Stack
     {
     public:
@@ -25,7 +25,7 @@ namespace Emblate
 
         ~Stack();
 
-        Stack<T>& operator=(const Stack<T>& other);
+        Stack<T, Container>& operator=(const Stack<T, Container>& other);
 
         bool empty();
         size_t size();
@@ -59,8 +59,8 @@ namespace Emblate
      *
      * @tparam T The type of the elements.
      */
-    template<typename T>
-    Stack<T>::Stack()
+    template<class T, class Container>
+    Stack<T, Container>::Stack()
             : m_data() {}
 
     /**
@@ -71,8 +71,8 @@ namespace Emblate
      * @param size Initial size.
      * @param value Initial value.
      */
-    template<typename T>
-    Stack<T>::Stack(size_t size, const T& value)
+    template<class T, class Container>
+    Stack<T, Container>::Stack(size_t size, const T& value)
             : m_data(size, value) {}
 
     /**
@@ -84,8 +84,8 @@ namespace Emblate
      * @param size Size of the base array.
      * @param reverse Reverse the order in which the elements appear.
      */
-    template<typename T>
-    Stack<T>::Stack(const T* array, size_t size, bool reverse)
+    template<class T, class Container>
+    Stack<T, Container>::Stack(const T* array, size_t size, bool reverse)
             : m_data(array, size, reverse) {}
 
     /**
@@ -95,8 +95,8 @@ namespace Emblate
      * @tparam T The type of the elements.
      * @param other Container to be copied.
      */
-    template<class T>
-    Stack<T>::Stack(Stack<T>& other)
+    template<class T, class Container>
+    Stack<T, Container>::Stack(Stack<T, Container>& other)
             : m_data(other.m_data) {}
 
     /**
@@ -106,8 +106,8 @@ namespace Emblate
      * @tparam T The type of the elements.
      * @param other Container to be copied.
      */
-    template<class T>
-    Stack<T>::Stack(const Stack<T>& other)
+    template<class T, class Container>
+    Stack<T, Container>::Stack(const Stack<T, Container>& other)
             : m_data(other.m_data) {}
 
     /**
@@ -115,10 +115,10 @@ namespace Emblate
      *
      * @tparam T The type of the elements.
      */
-    template<typename T>
-    Stack<T>::~Stack()
+    template<class T, class Container>
+    Stack<T, Container>::~Stack()
     {
-        m_data.~List();
+        m_data.~Container();
     }
 
     /**
@@ -128,8 +128,8 @@ namespace Emblate
      * @param other Container to be copied.
      * @return Copied container.
      */
-    template<typename T>
-    Stack<T>& Stack<T>::operator=(const Stack<T>& other)
+    template<class T, class Container>
+    Stack<T, Container>& Stack<T, Container>::operator=(const Stack<T, Container>& other)
     {
         // Self-assignment
         if (this == &other) return *this;
@@ -146,8 +146,8 @@ namespace Emblate
      * @tparam T The type of the elements.
      * @return True if the container is empty, false otherwise.
      */
-    template<class T>
-    bool Stack<T>::empty()
+    template<class T, class Container>
+    bool Stack<T, Container>::empty()
     {
         return m_data.empty();
     }
@@ -158,8 +158,8 @@ namespace Emblate
      * @tparam T The type of the elements.
      * @return The number of elements.
      */
-    template<typename T>
-    size_t Stack<T>::size()
+    template<class T, class Container>
+    size_t Stack<T, Container>::size()
     {
         return m_data.size();
     }
@@ -171,8 +171,8 @@ namespace Emblate
      * @param pos Position of the element to return.
      * @return Reference to the requested element.
      */
-    template<class T>
-    T& Stack<T>::at(size_t i)
+    template<class T, class Container>
+    T& Stack<T, Container>::at(size_t i)
     {
         if (i >= size()) { throw out_of_range(); }
         return m_data[i];
@@ -185,8 +185,8 @@ namespace Emblate
      * @param pos Position of the element to return.
      * @return Reference to the requested element.
      */
-    template<class T>
-    const T& Stack<T>::at(size_t i) const
+    template<class T, class Container>
+    const T& Stack<T, Container>::at(size_t i) const
     {
         if (i >= size()) { throw out_of_range(); }
         return m_data[i];
@@ -199,8 +199,8 @@ namespace Emblate
      * @param pos Position of the element to return.
      * @return Reference to the requested element.
      */
-    template<class T>
-    T& Stack<T>::operator[](size_t i)
+    template<class T, class Container>
+    T& Stack<T, Container>::operator[](size_t i)
     {
         return m_data[i];
     }
@@ -212,8 +212,8 @@ namespace Emblate
      * @param pos Position of the element to return.
      * @return Reference to the requested element.
      */
-    template<class T>
-    const T& Stack<T>::operator[](size_t i) const
+    template<class T, class Container>
+    const T& Stack<T, Container>::operator[](size_t i) const
     {
         return m_data[i];
     }
@@ -224,8 +224,8 @@ namespace Emblate
      * @tparam T The type of the elements.
      * @return Reference to the first element.
      */
-    template<class T>
-    T& Stack<T>::front()
+    template<class T, class Container>
+    T& Stack<T, Container>::front()
     {
         return m_data.front();
     }
@@ -236,8 +236,8 @@ namespace Emblate
      * @tparam T The type of the elements.
      * @return Reference to the first element.
      */
-    template<class T>
-    const T& Stack<T>::front() const
+    template<class T, class Container>
+    const T& Stack<T, Container>::front() const
     {
         return m_data.front();
     }
@@ -248,8 +248,8 @@ namespace Emblate
      * @tparam T The type of the elements.
      * @return Reference to the last element.
      */
-    template<class T>
-    T& Stack<T>::back()
+    template<class T, class Container>
+    T& Stack<T, Container>::back()
     {
         return m_data.back();
     }
@@ -260,8 +260,8 @@ namespace Emblate
      * @tparam T The type of the elements.
      * @return Reference to the last element.
      */
-    template<class T>
-    const T& Stack<T>::back() const
+    template<class T, class Container>
+    const T& Stack<T, Container>::back() const
     {
         return m_data.back();
     }
@@ -273,8 +273,8 @@ namespace Emblate
      * @tparam T The type of the elements.
      * @return Reference to the underlying container.
      */
-    template<class T>
-    T* Stack<T>::data()
+    template<class T, class Container>
+    T* Stack<T, Container>::data()
     {
         return m_data;
     }
@@ -286,8 +286,8 @@ namespace Emblate
      * @tparam T The type of the elements.
      * @return Reference to the underlying container.
      */
-    template<class T>
-    const T* Stack<T>::data() const
+    template<class T, class Container>
+    const T* Stack<T, Container>::data() const
     {
         return m_data;
     }
@@ -298,8 +298,8 @@ namespace Emblate
      *
      * @tparam T The type of the elements.
      */
-    template<typename T>
-    void Stack<T>::clear()
+    template<class T, class Container>
+    void Stack<T, Container>::clear()
     {
         m_data.clear();
     }
@@ -310,8 +310,8 @@ namespace Emblate
      * @tparam T The type of the elements.
      * @param value Value of the element to append.
      */
-    template<typename T>
-    void Stack<T>::push(T value)
+    template<class T, class Container>
+    void Stack<T, Container>::push(T value)
     {
         m_data.push_back(value);
     }
@@ -321,8 +321,8 @@ namespace Emblate
      *
      * @tparam T The type of the elements.
      */
-    template<typename T>
-    void Stack<T>::pop()
+    template<class T, class Container>
+    void Stack<T, Container>::pop()
     {
         m_data.pop_back();
     }

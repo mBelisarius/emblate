@@ -15,7 +15,7 @@ namespace Emblate
      *
      * @tparam T The type of the elements.
      */
-    template<typename T>
+    template<class T>
     class Vector
     {
     public:
@@ -69,7 +69,7 @@ namespace Emblate
      *
      * @tparam T The type of the elements.
      */
-    template<typename T>
+    template<class T>
     Vector<T>::Vector()
             : m_data(), m_size(), m_capacity() {}
 
@@ -80,7 +80,7 @@ namespace Emblate
      * @tparam T The type of the elements.
      * @param size Initial size.
      */
-    template<typename T>
+    template<class T>
     Vector<T>::Vector(size_t size)
             : m_data(new T[size]), m_size(size), m_capacity(size)
     {
@@ -98,7 +98,7 @@ namespace Emblate
      * @param size Initial size.
      * @param value Initial value.
      */
-    template<typename T>
+    template<class T>
     Vector<T>::Vector(size_t size, const T& value)
             : m_data(new T[size]), m_size(size), m_capacity(size)
     {
@@ -117,7 +117,7 @@ namespace Emblate
      * @param size Size of the base array.
      * @param reverse Reverse the order in which the elements appear.
      */
-    template<typename T>
+    template<class T>
     Vector<T>::Vector(const T* array, size_t size)
             : m_data(new T[size]), m_size(size), m_capacity(size)
     {
@@ -150,7 +150,7 @@ namespace Emblate
      *
      * @tparam T The type of the elements.
      */
-    template<typename T>
+    template<class T>
     Vector<T>::~Vector()
     {
         delete[] m_data;
@@ -163,7 +163,7 @@ namespace Emblate
      * @param other Container to be copied.
      * @return Copied container.
      */
-    template<typename T>
+    template<class T>
     Vector<T>& Vector<T>::operator=(const Vector<T>& other)
     {
         // Self-assignment
@@ -261,7 +261,7 @@ namespace Emblate
      * @tparam T The type of the elements.
      * @return The number of elements.
      */
-    template<typename T>
+    template<class T>
     size_t Vector<T>::size() const
     {
         return m_size;
@@ -275,7 +275,7 @@ namespace Emblate
      * @return The number of elements that can be held in currently
      * allocated storage.
      */
-    template<typename T>
+    template<class T>
     size_t Vector<T>::capacity()
     {
         return m_capacity;
@@ -417,7 +417,7 @@ namespace Emblate
      *
      * @tparam T The type of the elements.
      */
-    template<typename T>
+    template<class T>
     void Vector<T>::clear()
     {
         for (size_t i = 0; i < m_size; i++)
@@ -434,7 +434,7 @@ namespace Emblate
      * @tparam T The type of the elements.
      * @param value Value of the element to append.
      */
-    template<typename T>
+    template<class T>
     void Vector<T>::push_back(T value)
     {
         if (m_capacity == 0) { reserve(8); }
@@ -449,7 +449,7 @@ namespace Emblate
      *
      * @tparam T The type of the elements.
      */
-    template<typename T>
+    template<class T>
     T Vector<T>::pop_back()
     {
         // TODO: Exception
@@ -466,7 +466,7 @@ namespace Emblate
      * @param pos1 Position of the first element to swap.
      * @param pos2 Position of the second element to swap.
      */
-    template<typename T>
+    template<class T>
     void Vector<T>::swap(size_t pos1, size_t pos2)
     {
         T tmp = m_data[pos1];

@@ -37,7 +37,7 @@ namespace Emblate
      *
      * @tparam T The type of the elements.
      */
-    template<typename T>
+    template<class T>
     class List
     {
     public:
@@ -98,7 +98,7 @@ namespace Emblate
      *
      * @tparam T The type of the elements.
      */
-    template<typename T>
+    template<class T>
     List<T>::List()
             : m_front_link(new Node<T>(T(), 0, 0)),
               m_back_link(new Node<T>(T(), m_front_link, 0))
@@ -115,7 +115,7 @@ namespace Emblate
      * @param size Initial size.
      * @param value Initial value.
      */
-    template<typename T>
+    template<class T>
     List<T>::List(size_t size, const T& value)
             : m_front_link(new Node<T>(T(), 0, 0)),
               m_back_link(new Node<T>(T(), m_front_link, 0))
@@ -138,7 +138,7 @@ namespace Emblate
      * @param size Size of the base array.
      * @param reverse Reverse the order in which the elements appear.
      */
-    template<typename T>
+    template<class T>
     List<T>::List(const T* array, size_t size, bool reverse)
             : m_front_link(new Node<T>(T(), 0, 0)),
               m_back_link(new Node<T>(T(), m_front_link, 0))
@@ -170,7 +170,7 @@ namespace Emblate
      * @tparam T The type of the elements.
      * @param other Container to be copied.
      */
-    template<typename T>
+    template<class T>
     List<T>::List(const List<T>& other)
             : m_front_link(new Node<T>(T(), 0, 0)),
               m_back_link(new Node<T>(T(), m_front_link, 0))
@@ -191,7 +191,7 @@ namespace Emblate
      *
      * @tparam T The type of the elements.
      */
-    template<typename T>
+    template<class T>
     List<T>::~List()
     {
         while (size() > 0) { pop_back(); }
@@ -204,7 +204,7 @@ namespace Emblate
      * @param other Container to be copied.
      * @return Copied container.
      */
-    template<typename T>
+    template<class T>
     List<T>& List<T>::operator=(const List<T>& other)
     {
         // Self-assignment
@@ -280,7 +280,7 @@ namespace Emblate
      * @tparam T The type of the elements.
      * @return The number of elements.
      */
-    template<typename T>
+    template<class T>
     size_t List<T>::size()
     {
         return m_size;
@@ -394,7 +394,7 @@ namespace Emblate
      * @tparam T The type of the elements.
      * @return Reference to the first element.
      */
-    template<typename T>
+    template<class T>
     T& List<T>::front()
     {
         if (m_size == 0) { throw out_of_range(); }
@@ -407,7 +407,7 @@ namespace Emblate
      * @tparam T The type of the elements.
      * @return Reference to the first element.
      */
-    template<typename T>
+    template<class T>
     const T& List<T>::front() const
     {
         if (m_size == 0) { throw out_of_range(); }
@@ -420,7 +420,7 @@ namespace Emblate
      * @tparam T The type of the elements.
      * @return Reference to the last element.
      */
-    template<typename T>
+    template<class T>
     T& List<T>::back()
     {
         if (m_size == 0) { throw out_of_range(); }
@@ -433,7 +433,7 @@ namespace Emblate
      * @tparam T The type of the elements.
      * @return Reference to the last element.
      */
-    template<typename T>
+    template<class T>
     const T& List<T>::back() const
     {
         if (m_size == 0) { throw out_of_range(); }
@@ -445,7 +445,7 @@ namespace Emblate
      *
      * @tparam T The type of the elements.
      */
-    template<typename T>
+    template<class T>
     void List<T>::clear()
     {
         while (size() > 0) { pop_back(); }
@@ -457,7 +457,7 @@ namespace Emblate
      * @tparam T The type of the elements.
      * @param value Value of the element to prepend.
      */
-    template<typename T>
+    template<class T>
     void List<T>::push_front(const T value)
     {
         auto* new_link = new Node<T>;
@@ -477,7 +477,7 @@ namespace Emblate
      * @tparam T The type of the elements.
      * @param value Value of the element to append.
      */
-    template<typename T>
+    template<class T>
     void List<T>::push_back(const T value)
     {
         Node<T>* newLink = new Node<T>;
@@ -496,7 +496,7 @@ namespace Emblate
      *
      * @tparam T The type of the elements.
      */
-    template<typename T>
+    template<class T>
     void List<T>::pop_front()
     {
         if (empty()) { return; }
@@ -514,7 +514,7 @@ namespace Emblate
      *
      * @tparam T The type of the elements.
      */
-    template<typename T>
+    template<class T>
     void List<T>::pop_back()
     {
         if (empty()) { return; }

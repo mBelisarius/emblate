@@ -1,5 +1,6 @@
 #include "src/Internal/Algorithms/Math.h"
 #include <gtest/gtest.h>
+#include <cmath>
 
 using Emblate::abs;
 using Emblate::floor;
@@ -84,6 +85,22 @@ TEST(MathTest, AbsNegativeZeroFloat)
     EXPECT_FLOAT_EQ(expected, abs(x));
 }
 
+TEST(MathTest, AbsPositiveMaxFloat)
+{
+    float x = FLT_MAX;
+    float expected = FLT_MAX;
+
+    EXPECT_FLOAT_EQ(expected, abs(x));
+}
+
+TEST(MathTest, AbsNegativeMaxFloat)
+{
+    float x = -FLT_MAX;
+    float expected = FLT_MAX;
+
+    EXPECT_FLOAT_EQ(expected, abs(x));
+}
+
 TEST(MathTest, FloorReturnTypeInt)
 {
     int x = 0;
@@ -162,6 +179,22 @@ TEST(MathTest, FloorNegativeZeroFloat)
     EXPECT_FLOAT_EQ(expected, floor(x));
 }
 
+TEST(MathTest, FloorPositiveMaxFloat)
+{
+    float x = FLT_MAX;
+    float expected = std::floor(x);
+
+    EXPECT_FLOAT_EQ(expected, floor(x));
+}
+
+TEST(MathTest, FloorNegativeMaxFloat)
+{
+    float x = -FLT_MAX;
+    float expected = std::floor(x);
+
+    EXPECT_FLOAT_EQ(expected, floor(x));
+}
+
 TEST(MathTest, CeilReturnTypeInt)
 {
     int x = 0;
@@ -236,6 +269,22 @@ TEST(MathTest, CeilNegativeZeroFloat)
 {
     float x = -0.0f;
     float expected = -0.0f;
+
+    EXPECT_FLOAT_EQ(expected, ceil(x));
+}
+
+TEST(MathTest, CeilPositiveMaxFloat)
+{
+    float x = FLT_MAX;
+    float expected = std::ceil(x);
+
+    EXPECT_FLOAT_EQ(expected, ceil(x));
+}
+
+TEST(MathTest, CeilNegativeMaxFloat)
+{
+    float x = -FLT_MAX;
+    float expected = std::ceil(x);
 
     EXPECT_FLOAT_EQ(expected, ceil(x));
 }

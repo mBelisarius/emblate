@@ -1,4 +1,4 @@
-#include "src/Internal/Algorithms/Utils.h"
+#include "src/Internal/Algorithm/Utils.h"
 #include <gtest/gtest.h>
 
 using Emblate::swap;

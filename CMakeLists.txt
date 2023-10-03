@@ -44,11 +44,11 @@ set_target_properties(${ProjectName} PROPERTIES LINKER_LANGUAGE CXX)
 enable_testing()
 
 add_executable("${ProjectName}-test"
-        tests/Algorithms/test_interpolate.cpp
-        tests/Algorithms/test_math.cpp
-        tests/Algorithms/test_search.cpp
-        tests/Algorithms/test_sort.cpp
-        tests/Algorithms/test_utils.cpp
+        tests/Algorithm/test_interpolate.cpp
+        tests/Algorithm/test_math.cpp
+        tests/Algorithm/test_search.cpp
+        tests/Algorithm/test_sort.cpp
+        tests/Algorithm/test_utils.cpp
         tests/Container/test_list.cpp
         tests/Container/test_queue.cpp
         tests/Container/test_stack.cpp

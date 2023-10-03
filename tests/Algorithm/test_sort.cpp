@@ -1,4 +1,4 @@
-#include "src/Internal/Algorithms/Sort.h"
+#include "src/Internal/Algorithm/Sort.h"
 #include "src/Container"
 #include <gtest/gtest.h>
 

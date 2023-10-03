@@ -1,4 +1,4 @@
-#include "src/Internal/Algorithms/Interpolate.h"
+#include "src/Internal/Algorithm/Interpolate.h"
 #include "src/Container"
 #include <gtest/gtest.h>
 

@@ -1,4 +1,4 @@
-#include "src/Internal/Algorithms/Math.h"
+#include "src/Internal/Algorithm/Math.h"
 #include <gtest/gtest.h>
 #include <cmath>
 

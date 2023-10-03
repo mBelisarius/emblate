@@ -1,4 +1,4 @@
-#include "src/Internal/Algorithms/Search.h"
+#include "src/Internal/Algorithm/Search.h"
 #include "src/Container"
 #include <gtest/gtest.h>
 

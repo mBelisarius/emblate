@@ -52,13 +52,20 @@ namespace Emblate
 
         class iterator;
 
-        /** Iterator to front (first) element */
+        /** Iterator to front (first) element.
+         *
+         * @return Iterator to front (first) element.
+         */
         iterator begin()
         {
             return iterator(m_front_link->next);
         }
 
-        /** Iterator to back (last) element */
+        /**
+         * Iterator to back (last) element.
+         *
+         * @return Iterator to back (last) element.
+         */
         iterator end()
         {
             return iterator(m_back_link->prev);
@@ -68,7 +75,7 @@ namespace Emblate
         virtual size_t size();
 
         virtual T& at(size_t pos);
-        virtual const T& at(size_t i) const;
+        virtual const T& at(size_t pos) const;
 
         T& operator[](size_t pos);
         const T& operator[](size_t pos) const;
@@ -328,16 +335,16 @@ namespace Emblate
      * @return Reference to the requested element.
      */
     template<class T>
-    const T& List<T>::at(size_t i) const
+    const T& List<T>::at(size_t pos) const
     {
-        if (i >= m_size) { throw out_of_range(); }
+        if (pos >= m_size) { throw out_of_range(); }
 
         Node<T>* elem;
 
-        if (i < m_size / 2)
+        if (pos < m_size / 2)
         {
             elem = m_front_link->next;
-            for (size_t _ = 0; _ < i; _++)
+            for (size_t _ = 0; _ < pos; _++)
             {
                 elem = elem->next;
             }
@@ -345,7 +352,7 @@ namespace Emblate
         else
         {
             elem = m_back_link->prev;
-            for (size_t _ = m_size - 1; _ > i; _--)
+            for (size_t _ = m_size - 1; _ > pos; _--)
             {
                 elem = elem->prev;
             }

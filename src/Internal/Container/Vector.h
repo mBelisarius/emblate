@@ -54,7 +54,7 @@ namespace Emblate
         void clear();
 
         void push_back(T value);
-        T pop_back();
+        void pop_back();
 
         void swap(size_t pos1, size_t pos2);
 
@@ -115,7 +115,6 @@ namespace Emblate
      * @tparam T The type of the elements.
      * @param array Plain C-style array.
      * @param size Size of the base array.
-     * @param reverse Reverse the order in which the elements appear.
      */
     template<class T>
     Vector<T>::Vector(const T* array, size_t size)
@@ -452,13 +451,12 @@ namespace Emblate
      * @tparam T The type of the elements.
      */
     template<class T>
-    T Vector<T>::pop_back()
+    void Vector<T>::pop_back()
     {
         // TODO: Exception
         if (m_size == 0) { throw; }
 
         m_size--;
-        return m_data[m_size];
     }
 
     /**

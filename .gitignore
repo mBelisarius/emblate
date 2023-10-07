@@ -3,6 +3,10 @@
 .vscode
 .vs
 
+# Doxygen output
+doc/html
+doc/latex
+
 # CMake
 cmake-build-*/
 

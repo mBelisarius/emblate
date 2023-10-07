@@ -41,9 +41,9 @@ namespace Emblate
 
         T* data();
 
-        T& at(size_t i);
+        T& at(size_t pos);
 
-        T& operator[](size_t i);
+        T& operator[](size_t pos);
 
         T& front();
 
@@ -193,10 +193,10 @@ namespace Emblate
      * @return Reference to the requested element.
      */
     template<class T, class Container>
-    T& Queue<T, Container>::at(size_t i)
+    T& Queue<T, Container>::at(size_t pos)
     {
-        if (i >= size()) { throw out_of_range(); }
-        return m_data[i];
+        if (pos >= size()) { throw out_of_range(); }
+        return m_data[pos];
     }
 
     /**
@@ -207,9 +207,9 @@ namespace Emblate
      * @return Reference to the requested element.
      */
     template<class T, class Container>
-    T& Queue<T, Container>::operator[](size_t i)
+    T& Queue<T, Container>::operator[](size_t pos)
     {
-        return m_data[i];
+        return m_data[pos];
     }
 
     /**
@@ -278,6 +278,7 @@ namespace Emblate
      *
      * @tparam T The type of the elements.
      * @param value Value of the element to push.
+     * @param maxsize Maximum size allowed for the Queue.
      */
     template<class T, class Container>
     void Queue<T, Container>::slide_limited(T value, size_t maxsize)

@@ -30,11 +30,11 @@ namespace Emblate
         bool empty();
         size_t size();
 
-        T& at(size_t i);
-        const T& at(size_t i) const;
+        T& at(size_t pos);
+        const T& at(size_t pos) const;
 
-        T& operator[](size_t i);
-        const T& operator[](size_t i) const;
+        T& operator[](size_t pos);
+        const T& operator[](size_t pos) const;
 
         T& front();
         const T& front() const;
@@ -172,10 +172,10 @@ namespace Emblate
      * @return Reference to the requested element.
      */
     template<class T, class Container>
-    T& Stack<T, Container>::at(size_t i)
+    T& Stack<T, Container>::at(size_t pos)
     {
-        if (i >= size()) { throw out_of_range(); }
-        return m_data[i];
+        if (pos >= size()) { throw out_of_range(); }
+        return m_data[pos];
     }
 
     /**
@@ -186,10 +186,10 @@ namespace Emblate
      * @return Reference to the requested element.
      */
     template<class T, class Container>
-    const T& Stack<T, Container>::at(size_t i) const
+    const T& Stack<T, Container>::at(size_t pos) const
     {
-        if (i >= size()) { throw out_of_range(); }
-        return m_data[i];
+        if (pos >= size()) { throw out_of_range(); }
+        return m_data[pos];
     }
 
     /**
@@ -200,9 +200,9 @@ namespace Emblate
      * @return Reference to the requested element.
      */
     template<class T, class Container>
-    T& Stack<T, Container>::operator[](size_t i)
+    T& Stack<T, Container>::operator[](size_t pos)
     {
-        return m_data[i];
+        return m_data[pos];
     }
 
     /**
@@ -213,9 +213,9 @@ namespace Emblate
      * @return Reference to the requested element.
      */
     template<class T, class Container>
-    const T& Stack<T, Container>::operator[](size_t i) const
+    const T& Stack<T, Container>::operator[](size_t pos) const
     {
-        return m_data[i];
+        return m_data[pos];
     }
 
     /**

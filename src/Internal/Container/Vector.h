@@ -201,6 +201,8 @@ namespace Emblate
         // This capacity is already sufficient
         if (capacity <= m_capacity) { return; }
 
+        size_t new_capacity = (capacity + 15) & 0xfffffff0;
+
         T* tmp = new T[capacity];
 
         for (size_t i = 0; i < m_size; i++)
@@ -437,7 +439,7 @@ namespace Emblate
     template<class T>
     void Vector<T>::push_back(T value)
     {
-        if (m_capacity == 0) { reserve(8); }
+        if (m_capacity == 0) { reserve(16); }
         else if (m_size == m_capacity) { reserve(2 * m_capacity); }
 
         m_data[m_size] = value;

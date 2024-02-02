@@ -149,7 +149,7 @@ Queue<T, Container>& Queue<T, Container>::operator=(
 template<class T, class Container>
 bool Queue<T, Container>::empty()
 {
-    return size() == 0;
+    return m_data.empty();
 }
 
 /**
@@ -197,10 +197,9 @@ void Queue<T, Container>::clear()
  * @return Reference to the requested element.
  */
 template<class T, class Container>
-T& Queue<T, Container>::at(size_t pos)
+T& Queue<T, Container>::at(const size_t pos)
 {
-    if (pos >= size()) { throw out_of_range(); }
-    return m_data[pos];
+    return m_data.at(pos);
 }
 
 /**
@@ -211,7 +210,7 @@ T& Queue<T, Container>::at(size_t pos)
  * @return Reference to the requested element.
  */
 template<class T, class Container>
-T& Queue<T, Container>::operator[](size_t pos)
+T& Queue<T, Container>::operator[](const size_t pos)
 {
     return m_data[pos];
 }
@@ -248,7 +247,7 @@ T& Queue<T, Container>::back()
  * @param value Value of the element to prepend.
  */
 template<class T, class Container>
-void Queue<T, Container>::push(T value)
+void Queue<T, Container>::push(const T value)
 {
     m_data.push_back(value);
 }
@@ -271,7 +270,7 @@ void Queue<T, Container>::pop()
  * @param value Value of the element to push.
  */
 template<class T, class Container>
-void Queue<T, Container>::slide(T value)
+void Queue<T, Container>::slide(const T value)
 {
     slide_limited(value, 1);
 }
@@ -285,10 +284,9 @@ void Queue<T, Container>::slide(T value)
  * @param maxsize Maximum size allowed for the Queue.
  */
 template<class T, class Container>
-void Queue<T, Container>::slide_limited(T value, size_t maxsize)
+void Queue<T, Container>::slide_limited(const T value, const size_t maxsize)
 {
     if (size() >= maxsize) { pop(); }
-
     push(value);
 }
 

@@ -62,7 +62,7 @@ public:
     void pop();
 
 private:
-    List<T> m_data;
+    Container m_data;
 };
 
 /**
@@ -184,10 +184,9 @@ size_t Stack<T, Container>::size()
  * @return Reference to the requested element.
  */
 template<class T, class Container>
-T& Stack<T, Container>::at(size_t pos)
+T& Stack<T, Container>::at(const size_t pos)
 {
-    if (pos >= size()) { throw out_of_range(); }
-    return m_data[pos];
+    return m_data.at(pos);
 }
 
 /**
@@ -198,10 +197,9 @@ T& Stack<T, Container>::at(size_t pos)
  * @return Reference to the requested element.
  */
 template<class T, class Container>
-const T& Stack<T, Container>::at(size_t pos) const
+const T& Stack<T, Container>::at(const size_t pos) const
 {
-    if (pos >= size()) { throw out_of_range(); }
-    return m_data[pos];
+    return m_data.at(pos);
 }
 
 /**
@@ -212,7 +210,7 @@ const T& Stack<T, Container>::at(size_t pos) const
  * @return Reference to the requested element.
  */
 template<class T, class Container>
-T& Stack<T, Container>::operator[](size_t pos)
+T& Stack<T, Container>::operator[](const size_t pos)
 {
     return m_data[pos];
 }
@@ -225,7 +223,7 @@ T& Stack<T, Container>::operator[](size_t pos)
  * @return Reference to the requested element.
  */
 template<class T, class Container>
-const T& Stack<T, Container>::operator[](size_t pos) const
+const T& Stack<T, Container>::operator[](const size_t pos) const
 {
     return m_data[pos];
 }

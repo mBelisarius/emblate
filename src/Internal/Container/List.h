@@ -22,8 +22,8 @@ struct Node
      * @param next_ Next node pointer.
      */
     explicit Node(const Elem& value_ = Elem(),
-                  Node* prev_ = 0,
-                  Node* next_ = 0)
+                  Node* prev_ = nullptr,
+                  Node* next_ = nullptr)
         : prev(prev_), next(next_), value(value_) {}
 
     Node* prev;
@@ -75,31 +75,31 @@ public:
         return iterator(m_back_link->prev);
     }
 
-    virtual bool empty();
+    bool empty() const;
 
-    virtual size_t size();
+    size_t size() const;
 
-    virtual T& at(size_t pos);
+    T& at(size_t pos);
 
-    virtual const T& at(size_t pos) const;
+    const T& at(size_t pos) const;
 
     T& operator[](size_t pos);
 
     const T& operator[](size_t pos) const;
 
-    virtual T& front();
+    T& front();
 
-    virtual const T& front() const;
+    const T& front() const;
 
-    virtual T& back();
+    T& back();
 
-    virtual const T& back() const;
+    const T& back() const;
 
-    virtual void clear();
+    void clear();
 
-    virtual void push_front(T value);
+    void push_front(T value);
 
-    virtual void push_back(T value);
+    void push_back(T value);
 
     void pop_front();
 
@@ -134,7 +134,7 @@ List<T>::List()
  * @param value Initial value.
  */
 template<class T>
-List<T>::List(size_t size, const T& value)
+List<T>::List(const size_t size, const T& value)
     : m_front_link(new Node<T>(T(), 0, 0)),
       m_back_link(new Node<T>(T(), m_front_link, 0))
 {
@@ -157,7 +157,7 @@ List<T>::List(size_t size, const T& value)
  * @param reverse Reverse the order in which the elements appear.
  */
 template<class T>
-List<T>::List(const T* array, size_t size, bool reverse)
+List<T>::List(const T* array, const size_t size, const bool reverse)
     : m_front_link(new Node<T>(T(), 0, 0)),
       m_back_link(new Node<T>(T(), m_front_link, 0))
 {
@@ -212,7 +212,7 @@ List<T>::List(const List<T>& other)
 template<class T>
 List<T>::~List()
 {
-    while (size() > 0) { pop_back(); }
+    clear();
 }
 
 /**
@@ -287,7 +287,7 @@ private:
  * @return True if the container is empty, false otherwise.
  */
 template<class T>
-bool List<T>::empty()
+bool List<T>::empty() const
 {
     return (m_size == 0);
 }
@@ -299,7 +299,7 @@ bool List<T>::empty()
  * @return The number of elements.
  */
 template<class T>
-size_t List<T>::size()
+size_t List<T>::size() const
 {
     return m_size;
 }
@@ -312,7 +312,7 @@ size_t List<T>::size()
  * @return Reference to the requested element.
  */
 template<class T>
-T& List<T>::at(size_t pos)
+T& List<T>::at(const size_t pos)
 {
     if (pos >= m_size) { throw out_of_range(); }
 
@@ -346,7 +346,7 @@ T& List<T>::at(size_t pos)
  * @return Reference to the requested element.
  */
 template<class T>
-const T& List<T>::at(size_t pos) const
+const T& List<T>::at(const size_t pos) const
 {
     if (pos >= m_size) { throw out_of_range(); }
 
@@ -380,11 +380,9 @@ const T& List<T>::at(size_t pos) const
  * @return Reference to the requested element.
  */
 template<class T>
-T& List<T>::operator[](size_t pos)
+T& List<T>::operator[](const size_t pos)
 {
-    size_t index = pos % static_cast<size_t>(m_size);
-
-    if (index < 0) { index += m_size; }
+    const size_t index = pos % m_size;
 
     return at(index);
 }
@@ -397,11 +395,9 @@ T& List<T>::operator[](size_t pos)
  * @return Reference to the requested element.
  */
 template<class T>
-const T& List<T>::operator[](size_t pos) const
+const T& List<T>::operator[](const size_t pos) const
 {
-    size_t index = pos % static_cast<size_t>(m_size);
-
-    if (index < 0) { index += m_size; }
+    const size_t index = pos % m_size;
 
     return at(index);
 }
@@ -466,7 +462,7 @@ const T& List<T>::back() const
 template<class T>
 void List<T>::clear()
 {
-    while (size() > 0) { pop_back(); }
+    while (!empty()) { pop_back(); }
 }
 
 /**
@@ -498,7 +494,7 @@ void List<T>::push_front(const T value)
 template<class T>
 void List<T>::push_back(const T value)
 {
-    Node<T>* newLink = new Node<T>;
+    auto* newLink = new Node<T>;
     newLink->value = value;
     newLink->prev = m_back_link->prev;
     newLink->next = m_back_link;

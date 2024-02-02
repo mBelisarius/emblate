@@ -20,7 +20,7 @@ namespace Emblate
     {
     public:
         Vector();
-        Vector(size_t size);
+        explicit Vector(size_t size);
         Vector(size_t size, const T& value);
         Vector(const T* array, size_t size);
         Vector(const Vector& other);
@@ -34,7 +34,7 @@ namespace Emblate
 
         bool empty() const;
         size_t size() const;
-        size_t capacity();
+        size_t capacity() const;
 
         T& at(size_t pos);
         const T& at(size_t pos) const;
@@ -71,7 +71,7 @@ namespace Emblate
      */
     template<class T>
     Vector<T>::Vector()
-            : m_data(), m_size(), m_capacity() {}
+            : m_data(), m_size(0), m_capacity(0) {}
 
     /**
      * Constructs the container with given size _size_ and unitialized
@@ -81,13 +81,11 @@ namespace Emblate
      * @param size Initial size.
      */
     template<class T>
-    Vector<T>::Vector(size_t size)
-            : m_data(new T[size]), m_size(size), m_capacity(size)
+    Vector<T>::Vector(const size_t size)
+            : m_data(nullptr), m_size(0), m_capacity(0)
     {
-        for (size_t i = 0; i < m_capacity; i++)
-        {
-            m_data[i] = T();
-        }
+        reserve(size);
+        m_size = size;
     }
 
     /**
@@ -99,10 +97,13 @@ namespace Emblate
      * @param value Initial value.
      */
     template<class T>
-    Vector<T>::Vector(size_t size, const T& value)
-            : m_data(new T[size]), m_size(size), m_capacity(size)
+    Vector<T>::Vector(const size_t size, const T& value)
+            : m_data(nullptr), m_size(0), m_capacity(0)
     {
-        for (size_t i = 0; i < m_capacity; i++)
+        reserve(size);
+        m_size = size;
+
+        for (size_t i = 0; i < m_size; i++)
         {
             m_data[i] = value;
         }
@@ -117,9 +118,12 @@ namespace Emblate
      * @param size Size of the base array.
      */
     template<class T>
-    Vector<T>::Vector(const T* array, size_t size)
-            : m_data(new T[size]), m_size(size), m_capacity(size)
+    Vector<T>::Vector(const T* array, const size_t size)
+            : m_data(nullptr), m_size(0), m_capacity(0)
     {
+        reserve(size);
+        m_size = size;
+
         for (size_t i = 0; i < m_size; i++)
         {
             m_data[i] = array[i];
@@ -135,10 +139,10 @@ namespace Emblate
      */
     template<class T>
     Vector<T>::Vector(const Vector<T>& other)
-            : m_data(new T[other.m_size]), m_size(other.m_size),
-              m_capacity(other.m_size)
+            : m_data(new T[other.m_capacity]), m_size(other.m_size),
+              m_capacity(other.m_capacity)
     {
-        for (size_t i = 0; i < other.m_size; i++)
+        for (size_t i = 0; i < m_size; i++)
         {
             m_data[i] = other.m_data[i];
         }
@@ -169,17 +173,13 @@ namespace Emblate
         if (this == &other) { return *this; }
 
         // Memory reallocation
-        if (other.m_size > m_capacity)
-        {
-            reserve(other.m_size);
-        }
-
-        // Copy assignment
+        if (other.m_size > m_capacity) { reserve(other.m_size); }
         m_size = other.m_size;
 
-        for (size_t i = 0; i < other.m_size; i++)
+        // Copy assignment
+        for (size_t i = 0; i < m_size; i++)
         {
-            m_data[i] = other.m_data[i];
+            m_data[i] = other[i];
         }
 
         return *this;
@@ -200,7 +200,7 @@ namespace Emblate
         // This capacity is already sufficient
         if (capacity <= m_capacity) { return; }
 
-        size_t new_capacity = (capacity + 15) & 0xfffffff0;
+        capacity = (capacity + 15) & 0xfffffff0;
 
         T* tmp = new T[capacity];
 
@@ -277,7 +277,7 @@ namespace Emblate
      * allocated storage.
      */
     template<class T>
-    size_t Vector<T>::capacity()
+    size_t Vector<T>::capacity() const
     {
         return m_capacity;
     }
@@ -290,7 +290,7 @@ namespace Emblate
      * @return Reference to the requested element.
      */
     template<class T>
-    T& Vector<T>::at(size_t pos)
+    T& Vector<T>::at(const size_t pos)
     {
         if (pos >= m_size) { throw out_of_range(); }
         return m_data[pos];
@@ -304,7 +304,7 @@ namespace Emblate
      * @return Reference to the requested element.
      */
     template<class T>
-    const T& Vector<T>::at(size_t pos) const
+    const T& Vector<T>::at(const size_t pos) const
     {
         if (pos >= m_size) { throw out_of_range(); }
         return m_data[pos];
@@ -318,7 +318,7 @@ namespace Emblate
      * @return Reference to the requested element.
      */
     template<class T>
-    T& Vector<T>::operator[](size_t pos)
+    T& Vector<T>::operator[](const size_t pos)
     {
         return m_data[pos % m_size];
     }
@@ -331,7 +331,7 @@ namespace Emblate
      * @return Reference to the requested element.
      */
     template<class T>
-    const T& Vector<T>::operator[](size_t pos) const
+    const T& Vector<T>::operator[](const size_t pos) const
     {
         return m_data[pos % m_size];
     }
@@ -454,7 +454,7 @@ namespace Emblate
     void Vector<T>::pop_back()
     {
         // TODO: Exception
-        if (m_size == 0) { throw; }
+        if (m_size == 0) { throw out_of_range(); }
 
         m_size--;
     }
@@ -467,7 +467,7 @@ namespace Emblate
      * @param pos2 Position of the second element to swap.
      */
     template<class T>
-    void Vector<T>::swap(size_t pos1, size_t pos2)
+    void Vector<T>::swap(const size_t pos1, const size_t pos2)
     {
         T tmp = m_data[pos1];
         m_data[pos1] = m_data[pos2];

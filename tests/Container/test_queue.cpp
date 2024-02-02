@@ -88,7 +88,6 @@ TEST(QueueTest, Slide)
     {
         EXPECT_EQ(queue.at(i), i + 2);
     }
-
 }
 
 TEST(QueueTest, SlideLimited)

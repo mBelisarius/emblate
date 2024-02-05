@@ -307,6 +307,7 @@ template<class T>
 T& Vector<T>::at(const size_t pos)
 {
     if (pos >= m_size) { throw out_of_range(); }
+
     return m_data[pos];
 }
 
@@ -321,6 +322,7 @@ template<class T>
 const T& Vector<T>::at(const size_t pos) const
 {
     if (pos >= m_size) { throw out_of_range(); }
+
     return m_data[pos];
 }
 
@@ -334,7 +336,7 @@ const T& Vector<T>::at(const size_t pos) const
 template<class T>
 T& Vector<T>::operator[](const size_t pos)
 {
-    return m_data[pos % m_size];
+    return m_data[pos];
 }
 
 /**
@@ -347,7 +349,7 @@ T& Vector<T>::operator[](const size_t pos)
 template<class T>
 const T& Vector<T>::operator[](const size_t pos) const
 {
-    return m_data[pos % m_size];
+    return m_data[pos];
 }
 
 /**

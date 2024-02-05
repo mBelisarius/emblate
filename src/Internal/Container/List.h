@@ -316,26 +316,7 @@ T& List<T>::at(const size_t pos)
 {
     if (pos >= m_size) { throw out_of_range(); }
 
-    Node<T>* elem;
-
-    if (pos < m_size / 2)
-    {
-        elem = m_front_link->next;
-        for (size_t _ = 0; _ < pos; _++)
-        {
-            elem = elem->next;
-        }
-    }
-    else
-    {
-        elem = m_back_link->prev;
-        for (size_t _ = m_size - 1; _ > pos; _--)
-        {
-            elem = elem->prev;
-        }
-    }
-
-    return elem->value;
+    return this->operator[](pos);
 }
 
 /**
@@ -350,6 +331,19 @@ const T& List<T>::at(const size_t pos) const
 {
     if (pos >= m_size) { throw out_of_range(); }
 
+    return this->operator[](pos);
+}
+
+/**
+ * Access specified element.
+ *
+ * @tparam T The type of the elements.
+ * @param pos Position of the element to return.
+ * @return Reference to the requested element.
+ */
+template<class T>
+T& List<T>::operator[](const size_t pos)
+{
     Node<T>* elem;
 
     if (pos < m_size / 2)
@@ -380,26 +374,28 @@ const T& List<T>::at(const size_t pos) const
  * @return Reference to the requested element.
  */
 template<class T>
-T& List<T>::operator[](const size_t pos)
-{
-    const size_t index = pos % m_size;
-
-    return at(index);
-}
-
-/**
- * Access specified element.
- *
- * @tparam T The type of the elements.
- * @param pos Position of the element to return.
- * @return Reference to the requested element.
- */
-template<class T>
 const T& List<T>::operator[](const size_t pos) const
 {
-    const size_t index = pos % m_size;
+    Node<T>* elem;
 
-    return at(index);
+    if (pos < m_size / 2)
+    {
+        elem = m_front_link->next;
+        for (size_t _ = 0; _ < pos; _++)
+        {
+            elem = elem->next;
+        }
+    }
+    else
+    {
+        elem = m_back_link->prev;
+        for (size_t _ = m_size - 1; _ > pos; _--)
+        {
+            elem = elem->prev;
+        }
+    }
+
+    return elem->value;
 }
 
 /**

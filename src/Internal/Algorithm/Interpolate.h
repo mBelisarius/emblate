@@ -18,8 +18,8 @@ template<typename T>
 class Interp1d
 {
 public:
-    Interp1d(Vector<T> xp,
-             Vector<T> yp,
+    Interp1d(const Vector<T>& xp,
+             const Vector<T>& yp,
              bool check_bounds = false,
              bool assume_sorted = false);
 
@@ -45,10 +45,10 @@ private:
  * @param assume_sorted Assume the _x_ array is sorted.
  */
 template<typename T>
-Interp1d<T>::Interp1d(Vector<T> xp,
-                      Vector<T> yp,
-                      bool check_bounds,
-                      bool assume_sorted)
+Interp1d<T>::Interp1d(const Vector<T>& xp,
+                      const Vector<T>& yp,
+                      const bool check_bounds,
+                      const bool assume_sorted)
     : m_x(xp),
       m_y(yp),
       m_check_bounds(check_bounds),
@@ -80,7 +80,7 @@ T Interp1d<T>::linear(T x)
     }
 
     size_t i = binarySearch<T>(m_x, x, 0, m_size - 1);
-    if ((i == m_size - 1) || (i != 0 && x < m_x[i])) { i--; }
+    if ((i == m_size - 1) || (i != 0 && x < m_x[i])) { --i; }
 
     T dydx = ((m_y[i + 1] - m_y[i]) / (m_x[i + 1] - m_x[i]));
     return m_y[i] + dydx * (x - m_x[i]);

@@ -13,7 +13,7 @@ namespace Emblate {
  * @return Absolute value of the element.
  */
 template<typename T>
-T abs(T val)
+T abs(const T val)
 {
     return val >= 0 ? val : -val;
 }
@@ -27,7 +27,7 @@ T abs(T val)
  */
 // TODO: Do not use type cast.
 template<typename T>
-inline T floor(T val)
+inline T floor(const T val)
 {
     auto aux = static_cast<int>(val);
 
@@ -47,7 +47,7 @@ inline T floor(T val)
  * @return Least integer value not less than _val_.
  */
 template<typename T>
-inline T ceil(T val)
+inline T ceil(const T val)
 {
     if (val - floor(val) > 0)
     {
@@ -69,7 +69,11 @@ inline T ceil(T val)
  * @return
  */
 template<typename T>
-inline T map(T val, T from_low, T from_high, T to_low, T to_high)
+inline T map(const T val,
+             const T from_low,
+             const T from_high,
+             const T to_low,
+             const T to_high)
 {
     return (val - from_low) * (to_high - to_low) / (from_high - from_low)
            + to_low;

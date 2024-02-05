@@ -1,7 +1,7 @@
 #ifndef EMBLATE_UTILS_H
 #define EMBLATE_UTILS_H
 
-#include "../Container//Defines.h"
+#include "../Container/Defines.h"
 
 namespace Emblate {
 
@@ -13,7 +13,7 @@ namespace Emblate {
  * @param elem2 Second element to be swaped.
  */
 template<typename T>
-void swap(T& elem1, T& elem2)
+void swap(T& elem1, T& elem2) noexcept
 {
     elem1 += elem2;
     elem2 = elem1 - elem2;
@@ -27,16 +27,15 @@ void swap(T& elem1, T& elem2)
  * @param str2 Second null-terminated byte string to compare.
  * @return True if both strings are equal. False otherwise.
  */
-template<typename String = const char*>
-bool strCmp(String str1, String str2)
+inline bool strCmp(const char* str1, const char* str2)
 {
     while (*str1 && (*str1 == *str2))
     {
-        str1++;
-        str2++;
+        ++str1;
+        ++str2;
     }
 
-    return *(String)str1 == *(String)str2;
+    return *str1 == *str2;
 }
 
 }

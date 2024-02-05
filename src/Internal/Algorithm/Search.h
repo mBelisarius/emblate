@@ -21,7 +21,7 @@ namespace Emblate {
  */
 template<typename T>
 size_t binarySearch(const Vector<T>& arr,
-                    T val,
+                    const T val,
                     size_t lower_index,
                     size_t upper_index)
 {
@@ -30,7 +30,7 @@ size_t binarySearch(const Vector<T>& arr,
         throw out_of_range();
     }
 
-    if (arr.size() == 0)
+    if (arr.empty())
     {
         throw invalid_argument();
     }

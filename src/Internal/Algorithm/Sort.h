@@ -18,13 +18,13 @@ class HeapSort
 public:
     explicit HeapSort(Vector<T>& a);
 
-    size_t iParent(size_t pos);
+    static size_t iParent(size_t pos);
 
-    size_t iLeftChild(size_t pos);
+    static size_t iLeftChild(size_t pos);
 
-    size_t iRightChild(size_t pos);
+    static size_t iRightChild(size_t pos);
 
-    size_t leafSearch(size_t start, size_t end);
+    size_t leafSearch(size_t start, size_t end) const;
 
     void siftDown(size_t start, size_t end);
 
@@ -54,7 +54,7 @@ HeapSort<T>::HeapSort(Vector<T>& a)
  * @return Index of the parent node.
  */
 template<typename T>
-inline size_t HeapSort<T>::iParent(size_t pos)
+inline size_t HeapSort<T>::iParent(const size_t pos)
 {
     return floor((pos - 1) / 2);
 }
@@ -67,7 +67,7 @@ inline size_t HeapSort<T>::iParent(size_t pos)
  * @return Index of the left child node.
  */
 template<typename T>
-inline size_t HeapSort<T>::iLeftChild(size_t pos)
+inline size_t HeapSort<T>::iLeftChild(const size_t pos)
 {
     return 2 * pos + 1;
 }
@@ -80,7 +80,7 @@ inline size_t HeapSort<T>::iLeftChild(size_t pos)
  * @return Index of the right child node.
  */
 template<typename T>
-inline size_t HeapSort<T>::iRightChild(size_t pos)
+inline size_t HeapSort<T>::iRightChild(const size_t pos)
 {
     return 2 * pos + 2;
 }
@@ -99,7 +99,8 @@ inline size_t HeapSort<T>::iRightChild(size_t pos)
  * @return Position in that path to insert _a[end]_.
  */
 template<typename T>
-inline size_t HeapSort<T>::leafSearch(size_t start, size_t end)
+inline size_t HeapSort<T>::leafSearch(const size_t start,
+                                      const size_t end) const
 {
     size_t j = start;
     while (iRightChild(j) <= end)
@@ -127,7 +128,7 @@ inline size_t HeapSort<T>::leafSearch(size_t start, size_t end)
  * @param end Index of the node to end the search.
  */
 template<typename T>
-void HeapSort<T>::siftDown(size_t start, size_t end)
+void HeapSort<T>::siftDown(const size_t start, const size_t end)
 {
     size_t j = leafSearch(start, end);
 
@@ -151,7 +152,7 @@ void HeapSort<T>::siftDown(size_t start, size_t end)
 template<typename T>
 void HeapSort<T>::heapify()
 {
-    for (size_t start = m_a.size(); start > 0; start--)
+    for (size_t start = m_a.size(); start > 0; --start)
     {
         siftDown(start - 1, m_a.size() - 1);
     }
@@ -167,7 +168,7 @@ void HeapSort<T>::sort()
 {
     heapify();
 
-    for (size_t end = m_a.size() - 1; end > 0; end--)
+    for (size_t end = m_a.size() - 1; end > 0; --end)
     {
         m_a.swap(end, 0);
         siftDown(0, end - 1);
